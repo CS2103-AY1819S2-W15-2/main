@@ -31,11 +31,13 @@
 <li><a href="#viewing-macro-statistics-compare-code-stats_mc-code">3.16. Viewing Macro Statistics Compare: <code>stats_mc</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.17. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">3.18. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.19. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.20. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.21. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.22. Saving the data</a></li>
-<li><a href="#email-reminders-code-coming-in-v2-0-code">3.23. Email reminders <code>[coming in v2.0]</code></a></li>
+<li><a href="#undoing-multiple-previous-commands-code-undom-code">3.19. Undoing multiple previous commands : <code>undoM</code></a></li>
+<li><a href="#undoing-specific-previous-command-code-undos-code">3.20. Undoing specific previous command : <code>undoS</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.21. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.22. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.23. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.24. Saving the data</a></li>
+<li><a href="#email-reminders-code-coming-in-v2-0-code">3.25. Email reminders <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -238,7 +240,7 @@ Format: <code>list v/VIEW</code></p>
 <p>v/all: displays entire list of expenses</p>
 </li>
 <li>
-<p>v/day: displays list of expenses added since last month</p>
+<p>v/day: displays list of expenses added since the day started</p>
 </li>
 <li>
 <p>v/month: displays list of expenses added since last month</p>
@@ -806,10 +808,7 @@ Format:
 <div class="ulist">
 <ul>
 <li>
-<p>If all parameters are empty, stats defaults to showing the result of :</p>
-</li>
-<li>
-<p>stat c/cat vr/pie</p>
+<p>If all parameters are empty, stats defaults to showing the result of "stat c/cat vr/pie"</p>
 </li>
 <li>
 <p>If MODE is not “cat”, display “User may choose a category with c/&lt;category&gt;” msg</p>
@@ -919,7 +918,7 @@ one month after START_DATE or the current date</p>
 <div class="sect2">
 <h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.17. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
+<p>Lists all the commands that you have entered, along with its index, in reverse chronological order.<br>
 Format: <code>history</code></p>
 </div>
 <div class="admonitionblock note">
@@ -951,7 +950,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>), modify budget (<code>addBudget</code>, <code>deleteBudget</code> and <code>editBudget</code>) and modify debt (<code>addDebt</code>, <code>deleteDebt</code>, <code>editDebt</code> and <code>paidDebt</code>).</p>
 </div>
 </td>
 </tr>
@@ -983,7 +982,105 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.19. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="undoing-multiple-previous-commands-code-undom-code"><a class="link" href="#undoing-multiple-previous-commands-code-undom-code">3.19. Undoing multiple previous commands : <code>undoM</code></a></h3>
+<div class="paragraph">
+<p>Restores the address book to the state before multiple previous <em>undoable</em> commands were executed.<br>
+Format: 'undo' NUMBER</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>), modify budget (<code>addBudget</code>, <code>deleteBudget</code> and <code>editBudget</code>) and modify debt (<code>addDebt</code>, <code>deleteDebt</code>, <code>editDebt</code> and <code>paidDebt</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+<code>list</code><br>
+<code>undoM 5</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undoM 2</code><br>
+The <code>undoM</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>delete 1</code><br>
+<code>list</code><br>
+<code>clear</code><br>
+<code>undoM 10</code> (reverses the <code>clear</code> command and reverses the <code>delete 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undoing-specific-previous-command-code-undos-code"><a class="link" href="#undoing-specific-previous-command-code-undos-code">3.20. Undoing specific previous command : <code>undoS</code></a></h3>
+<div class="paragraph">
+<p>Restores the address book to the state before a specific <em>undoable</em> command was executed.<br>
+Format: 'undo' INDEX</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>), modify budget (<code>addBudget</code>, <code>deleteBudget</code> and <code>editBudget</code>) and modify debt (<code>addDebt</code>, <code>deleteDebt</code>, <code>editDebt</code> and <code>paidDebt</code>).</p>
+</li>
+<li>
+<p>Index of commands can be viewed using <code>history</code>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code>             (index 1)<br>
+<code>delete 2</code>               (index 2)<br>
+<code>undoS 1</code> (reverses the <code>delete 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code>             (index 1)<br>
+<code>list</code>                   (index 2)<br>
+<code>undoS 2</code><br>
+The <code>undoS</code> command fails as <code>list</code> is not an undoable command.</p>
+</li>
+<li>
+<p><code>delete 1</code>             (index 1)<br>
+<code>list</code>                   (index 2)<br>
+<code>clear</code>                  (index 3)<br>
+<code>undoS 4</code><br>
+The <code>undoS</code> command fails as there is no command with INDEX 4.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.21. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -1015,28 +1112,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.20. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.22. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.21. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.23. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.24. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="email-reminders-code-coming-in-v2-0-code"><a class="link" href="#email-reminders-code-coming-in-v2-0-code">3.23. Email reminders <code>[coming in v2.0]</code></a></h3>
+<h3 id="email-reminders-code-coming-in-v2-0-code"><a class="link" href="#email-reminders-code-coming-in-v2-0-code">3.25. Email reminders <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{Sends an email if the expenses exceed the budget or when debts are due.}</em></p>
 </div>
@@ -1083,6 +1180,12 @@ e.g. <code>edit 2 n/Bak Kut Teh</code></p>
 </li>
 <li>
 <p><strong>Undo</strong> : <code>undo</code></p>
+</li>
+<li>
+<p><strong>Undo Multiple</strong> : <code>undoM NUMBER</code></p>
+</li>
+<li>
+<p><strong>Undo Specific</strong> : <code>undoS INDEX</code></p>
 </li>
 <li>
 <p><strong>Redo</strong> : <code>redo</code></p>
@@ -1135,4 +1238,4 @@ e.g. <code>stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-02-19 14:04:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-02-19 15:12:12 UTC</div></div></div></body></html>
