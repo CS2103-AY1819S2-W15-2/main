@@ -28,30 +28,8 @@
 <li><a href="#editing-an-expense-code-editexpense-code">4.4. Editing an expense : <code>editexpense</code></a></li>
 <li><a href="#deleting-an-expense-code-deleteexpense-code">4.5. Deleting an expense : <code>deleteexpense</code></a></li>
 <li><a href="#adding-a-budget-code-addbudget-code">4.6. Adding a budget : <code>addbudget</code></a></li>
-<li><a href="#editing-a-budget-code-editbudget-code">4.7. Editing a budget: <code>editbudget</code></a></li>
-<li><a href="#deleting-a-budget-code-deletebudget-code">4.8. Deleting a budget: <code>deletebudget</code></a></li>
-<li><a href="#listing-debts-code-listdebt-code">4.9. Listing debts: <code>listdebt</code></a></li>
-<li><a href="#adding-a-debt-code-adddebt-code">4.10. Adding a debt: <code>adddebt</code></a></li>
-<li><a href="#editing-a-debt-code-editdebt-code">4.11. Editing a debt: <code>editdebt</code></a></li>
-<li><a href="#deleting-a-debt-code-deletedebt-code">4.12. Deleting a debt: <code>deletedebt</code></a></li>
-<li><a href="#paying-off-a-debt-code-paydebt-code">4.13. Paying off a debt: <code>paydebt</code></a></li>
-<li><a href="#adding-a-recurring-code-addrecurring-code">4.14. Adding a recurring: <code>addrecurring</code></a></li>
-<li><a href="#editing-a-recurring-code-editrecurring-code">4.15. Editing a recurring : <code>editrecurring</code></a></li>
-<li><a href="#deleting-a-recurring-code-deleterecurring-code">4.16. Deleting a recurring: <code>deleterecurring</code></a></li>
-<li><a href="#viewing-statistics-summary-code-stats-code">4.17. Viewing Statistics - Summary: <code>stats</code></a></li>
-<li><a href="#viewing-statistics-trend-code-statstrend-code">4.18. Viewing Statistics - Trend: <code>statstrend</code></a></li>
-<li><a href="#viewing-statistics-compare-code-statscompare-code">4.19. Viewing Statistics - Compare: <code>statscompare</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.20. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.21. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.22. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.23. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.24. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.25. Saving the data</a></li>
-<li><a href="#email-reminders-code-coming-in-v2-0-code">4.26. Email reminders <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
-<li><a href="#faq">5. FAQ</a></li>
-<li><a href="#command-summary">6. Command Summary</a></li>
 </ul>
 </div>
 </div>
@@ -410,27 +388,26 @@ Deletes the 2nd expense in the finance tracker.</p>
 <h3 id="adding-a-budget-code-addbudget-code"><a class="link" href="#adding-a-budget-code-addbudget-code">4.6. Adding a budget : <code>addbudget</code></a></h3>
 <div class="paragraph">
 <p>Adds a budget with a time frame to the tracker.<br>
-Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></p>
+Format 1: <code>addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]</code></p>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>There is only one budget for each category.</p>
+<p>The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
+“entertainment” and “others” which are case insensitive.</p>
 </li>
 <li>
-<p>The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.</p>
+<p>The program only limits one budget for each category.</p>
 </li>
 <li>
-<p>The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.</p>
+<p>START_DATE and END_DATE must be in dd-mm-yyyy format.</p>
 </li>
 <li>
-<p>The START_DATE and END_DATE should be in dd-mm-yyyy format.</p>
+<p>If START_DATE is omitted, current date will be used.</p>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -462,19 +439,19 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Editing a budget: <code>editbudget</code></p>
 </div>
-<div class="sect2">
-<h3 id="editing-a-budget-code-editbudget-code"><a class="link" href="#editing-a-budget-code-editbudget-code">4.7. Editing a budget: <code>editbudget</code></a></h3>
 <div class="paragraph">
 <p>Edits a budget in the finance tracker.<br>
 Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the budget of the specified <code>CATEGORY</code>.</p>
+<p>Edits the budget of the specified CATEGORY.</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -484,23 +461,12 @@ Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>editbudget c/food $/500</code></p>
-</li>
-<li>
-<p><code>editbudget c/shopping ed/31-3-2019</code></p>
-</li>
-<li>
-<p><code>editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
-</li>
-</ul>
+<p>Examples:
+* <code>editbudget c/shopping ed/31-3-2019</code>
+* <code>editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
 </div>
 <div class="paragraph">
 <p>Format 2: <code>editbudget</code></p>
@@ -515,14 +481,14 @@ Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END
 <code>Please enter the start date of budget to be updated (optional):</code><br>
 <code>Please enter the end date of budget to be updated (optional):</code></p>
 </div>
+<div class="paragraph">
+<p>=== Deleting a budget: <code>deletebudget</code></p>
 </div>
-<div class="sect2">
-<h3 id="deleting-a-budget-code-deletebudget-code"><a class="link" href="#deleting-a-budget-code-deletebudget-code">4.8. Deleting a budget: <code>deletebudget</code></a></h3>
 <div class="paragraph">
 <p>Deletes a budget from the finance tracker.</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -530,8 +496,8 @@ Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Format: <code>deletebudget c/CATEGORY</code></p>
 </div>
@@ -545,15 +511,13 @@ Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="listing-debts-code-listdebt-code"><a class="link" href="#listing-debts-code-listdebt-code">4.9. Listing debts: <code>listdebt</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of debts in the finance tracker according to the view specified.
+<p>=== Listing debts: <code>listdebt</code>
+Shows a list of debts in the finance tracker according to the view specified.
 Format: <code>listdebt [v/VIEW]</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -574,19 +538,19 @@ Format: <code>listdebt [v/VIEW]</code></p>
 </li>
 </ul>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>=== Adding a debt: <code>adddebt</code></p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="adding-a-debt-code-adddebt-code"><a class="link" href="#adding-a-debt-code-adddebt-code">4.10. Adding a debt: <code>adddebt</code></a></h3>
 <div class="paragraph">
 <p>Adds a debt to the finance tracker.</p>
 </div>
 <div class="paragraph">
 <p>Format 1: <code>adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -606,8 +570,8 @@ Format: <code>listdebt [v/VIEW]</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -651,15 +615,15 @@ You can omit (optional) parameters by leaving them empty.
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Editing a debt: <code>editdebt</code></p>
 </div>
-<div class="sect2">
-<h3 id="editing-a-debt-code-editdebt-code"><a class="link" href="#editing-a-debt-code-editdebt-code">4.11. Editing a debt: <code>editdebt</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing debt in the finance tracker.<br>
 Format 1: <code>editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -676,8 +640,8 @@ Format 1: <code>editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -719,15 +683,13 @@ Edits expense owed and amount owed of the 5th debt to be <code>Tommy</code> and 
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-debt-code-deletedebt-code"><a class="link" href="#deleting-a-debt-code-deletedebt-code">4.12. Deleting a debt: <code>deletedebt</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified debt from the finance tracker.
+<p>=== Deleting a debt: <code>deletedebt</code>
+Deletes the specified debt from the finance tracker.
 Format: <code>deletedebt INDEX</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -738,8 +700,8 @@ Format: <code>deletedebt INDEX</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -752,17 +714,15 @@ Deletes the 5th debt in the finance tracker.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="paying-off-a-debt-code-paydebt-code"><a class="link" href="#paying-off-a-debt-code-paydebt-code">4.13. Paying off a debt: <code>paydebt</code></a></h3>
 <div class="paragraph">
-<p>Converts the specified debt into an expense.</p>
+<p>=== Paying off a debt: <code>paydebt</code>
+Converts the specified debt into an expense.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>paydebt INDEX [d/DATE]</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -801,8 +761,8 @@ Deletes the 5th debt in the finance tracker.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -815,17 +775,15 @@ Converts the 3rd debt in the finance tracker into an expense.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="adding-a-recurring-code-addrecurring-code"><a class="link" href="#adding-a-recurring-code-addrecurring-code">4.14. Adding a recurring: <code>addrecurring</code></a></h3>
 <div class="paragraph">
-<p>Adds a recurring payment to the finance tracker.</p>
+<p>=== Adding a recurring: <code>addrecurring</code>
+Adds a recurring payment to the finance tracker.</p>
 </div>
 <div class="paragraph">
 <p>Format 1: <code>addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE</code></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -854,8 +812,8 @@ Converts the 3rd debt in the finance tracker into an expense.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -901,15 +859,15 @@ You can omit (optional) parameters by leaving them empty.
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Editing a recurring : <code>editrecurring</code></p>
 </div>
-<div class="sect2">
-<h3 id="editing-a-recurring-code-editrecurring-code"><a class="link" href="#editing-a-recurring-code-editrecurring-code">4.15. Editing a recurring : <code>editrecurring</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing recurring in the finance tracker.<br>
 Format 1: <code>editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code><br></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -942,8 +900,8 @@ Format 1: <code>editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CA
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -982,15 +940,15 @@ Edits the amount and category of the 9th recurring to be <code>450</code> and <c
 <code>Please enter the start date of the recurring to be updated (optional):</code><br>
 <code>Please enter the remark of the expense to be updated (optional):</code></p>
 </div>
+<div class="paragraph">
+<p>=== Deleting a recurring: <code>deleterecurring</code></p>
 </div>
-<div class="sect2">
-<h3 id="deleting-a-recurring-code-deleterecurring-code"><a class="link" href="#deleting-a-recurring-code-deleterecurring-code">4.16. Deleting a recurring: <code>deleterecurring</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified recurring from the finance tracker.<br>
 Format: <code>deleterecurring INDEX [p/DELETEPASTOPTION]</code><br></p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1020,8 +978,8 @@ Format: <code>deleterecurring INDEX [p/DELETEPASTOPTION]</code><br></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -1046,11 +1004,9 @@ Deletes the 2nd recurring in the finance tracker, without deleting old expenses 
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="viewing-statistics-summary-code-stats-code"><a class="link" href="#viewing-statistics-summary-code-stats-code">4.17. Viewing Statistics - Summary: <code>stats</code></a></h3>
 <div class="paragraph">
-<p>Produces statistics regarding the user&#8217;s finance.<br>
+<p>=== Viewing Statistics - Summary: <code>stats</code>
+Produces statistics regarding the user&#8217;s finance.<br>
 The statistics include the frequency of entries, the total amount of money spent<br>
 The user may choose the time frame to be considered for the statistic by entering the start date and end date.<br>
 The user may also choose to display only the results in a specific category.<br>
@@ -1102,13 +1058,8 @@ The user may also choose the way he wants the information expressed. Options: Pi
 <p>Format:
 <code>stats [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1130,10 +1081,8 @@ one month after START_DATE or the current date</p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -1153,11 +1102,9 @@ one month after START_DATE or the current date</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="viewing-statistics-trend-code-statstrend-code"><a class="link" href="#viewing-statistics-trend-code-statstrend-code">4.18. Viewing Statistics - Trend: <code>statstrend</code></a></h3>
 <div class="paragraph">
-<p>Produces statistics regarding the user&#8217;s finance over a period of time to show trends.<br>
+<p>=== Viewing Statistics - Trend: <code>statstrend</code>
+Produces statistics regarding the user&#8217;s finance over a period of time to show trends.<br>
 The statistics include the total amount of money spent on different categories and the frequency of entries in those categories.<br>
 The user must choose the time frame to be considered for the statistic by entering the start date and end date.<br>
 The user may also choose to display only the results in a specific category.<br>
@@ -1215,20 +1162,13 @@ The user may also choose the way he wants the information expressed. Options: Pi
 <div class="paragraph">
 <p>Format: <code>statstrend sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.</p>
 </div>
-</td>
-</tr>
-</table>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -1245,11 +1185,9 @@ The user may also choose the way he wants the information expressed. Options: Pi
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="viewing-statistics-compare-code-statscompare-code"><a class="link" href="#viewing-statistics-compare-code-statscompare-code">4.19. Viewing Statistics - Compare: <code>statscompare</code></a></h3>
 <div class="paragraph">
-<p>Produces and displays statistics regarding the user&#8217;s finance for 2 to 4 time periods.
+<p>=== Viewing Statistics - Compare: <code>statscompare</code>
+Produces and displays statistics regarding the user&#8217;s finance for 2 to 4 time periods.
 The statistics include the total amount of money spent on different categories and the frequency of entries in those categories.<br>
 The user must specify at least 2 and not more than 4 time periods by specifying the starting dates and the desired period length.<br>
 The user may also choose to display only the results in a specific category.<br>
@@ -1314,20 +1252,13 @@ The user may also choose the way he wants the information expressed. Options: Pi
 <div class="paragraph">
 <p>Format: <code>statscompare d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>If VISUAL_REPRESENTATION field is left empty, vr options will be displayed</p>
 </div>
-</td>
-</tr>
-</table>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -1344,48 +1275,34 @@ The user may also choose the way he wants the information expressed. Options: Pi
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Listing entered commands : <code>history</code></p>
 </div>
-<div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.20. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered, along with its index, in reverse chronological order.<br>
 Format: <code>history</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>=== Undoing previous command : <code>undo</code></p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.21. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the finance tracker to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>Undoable commands: those commands that modify the finance tracker&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>), modify budget (<code>addbudget</code>, <code>deletedudget</code> and <code>editbudget</code>), modify debt (<code>adddebt</code>, <code>deletedebt</code>, <code>editdebt</code> and <code>paydebt</code>) and modify recurring (<code>addrecurring</code>, <code>deleterecurring</code> and <code>editrecurring</code>).</p>
 </div>
-</td>
-</tr>
-</table>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -1410,9 +1327,9 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Redoing the previously undone command : <code>redo</code></p>
 </div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.22. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -1442,48 +1359,43 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Clearing all entries : <code>clear</code></p>
 </div>
-<div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.23. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the finance tracker.<br>
 Format: <code>clear</code></p>
 </div>
+<div class="paragraph">
+<p>=== Exiting the program : <code>exit</code></p>
 </div>
-<div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.24. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
+<div class="paragraph">
+<p>=== Saving the data</p>
 </div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.25. Saving the data</a></h3>
 <div class="paragraph">
 <p>Finance tracker data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
+<div class="paragraph">
+<p>=== Email reminders <code>[coming in v2.0]</code></p>
 </div>
-<div class="sect2">
-<h3 id="email-reminders-code-coming-in-v2-0-code"><a class="link" href="#email-reminders-code-coming-in-v2-0-code">4.26. Email reminders <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{Sends an email if the expenses are about to exceed the budget or when debts are due.}</em></p>
 </div>
+<div class="paragraph">
+<p>== FAQ</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
 <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Financial Tracker folder.</p>
 </div>
+<div class="paragraph">
+<p>== Command Summary</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
-<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -1517,11 +1429,11 @@ e.g. <code>deleteexpense 3</code></p>
 <p><strong>Clear expenses</strong> : <code>clearexpense</code></p>
 </li>
 <li>
-<p><strong>Add a budget</strong> : <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code><br>
+<p><strong>Add a budget</strong> : <code>addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]</code><br>
 e.g. <code>addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019</code></p>
 </li>
 <li>
-<p><strong>Edit a budget</strong> : <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]</code><br>
+<p><strong>Edit a budget</strong> : <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE] [r/REMARKS]</code><br>
 e.g. <code>editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
 </li>
 <li>
@@ -1576,4 +1488,7 @@ e.g. <code>stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 16:03:20 UTC</div></div></div></body></html>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 16:25:33 UTC</div></div></div></body></html>

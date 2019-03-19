@@ -34,7 +34,10 @@
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
 <li><a href="#listing-feature">3.5. Listing Feature</a></li>
-<li><a href="#pay-debt-function">3.6. Pay Debt Function</a></li>
+<li><a href="#recurring-feature">3.6. Recurring Feature</a></li>
+<li><a href="#pay-debt-function">3.7. Pay Debt Function</a></li>
+<li><a href="#statistics-feature">3.8. Statistics Feature</a></li>
+<li><a href="#budget-feature">3.9. Budget feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -892,7 +895,28 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="pay-debt-function"><a class="link" href="#pay-debt-function">3.6. Pay Debt Function</a></h3>
+<h3 id="recurring-feature"><a class="link" href="#recurring-feature">3.6. Recurring Feature</a></h3>
+<div class="paragraph">
+<p>The Recurring feature consists of <code>addrecurring</code>, <code>listrecurring</code>, <code>editrecurring</code> and <code>deleterecurring</code>.</p>
+</div>
+<div class="paragraph">
+<p>This feature allows users to add recurring expenses: expenses that are perioidic and have a fixed frequency and a defined number of occurrences. Examples of these 'recurring' are bills or subscription fees.</p>
+</div>
+<div class="paragraph">
+<p>Instead of manually adding the same expense repetitively, use <code>addrecurring</code> to add a Recurring. The Finance Tracker will automatically add the expense for you periodically at your specified frequency and for your specified duration!</p>
+</div>
+<div class="paragraph">
+<p>This feature also simplifies the deletion and editing of these recurring expenses.</p>
+</div>
+<div class="sect3">
+<h4 id="future-implementation-of-automatic-expense-adding"><a class="link" href="#future-implementation-of-automatic-expense-adding">3.6.1. Future Implementation of Automatic expense adding</a></h4>
+<div class="paragraph">
+<p>Work in Progress</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pay-debt-function"><a class="link" href="#pay-debt-function">3.7. Pay Debt Function</a></h3>
 <div class="paragraph">
 <p>This feature is currently not implemented. Will be implemented by v1.3.<br></p>
 </div>
@@ -939,6 +963,75 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p><code>Remarks</code> : Same remarks will be used</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.8. Statistics Feature</a></h3>
+<div class="paragraph">
+<p>This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.</p>
+</div>
+<div class="paragraph">
+<p>The Statistic feature consists of <code>stats</code>, <code>statstrend</code> and <code>statscompare</code></p>
+</div>
+<div class="paragraph">
+<p>This implementation is under Logic and Model components.</p>
+</div>
+<div class="sect3">
+<h4 id="code-stats-code"><a class="link" href="#code-stats-code">3.8.1. <code>stats</code></a></h4>
+<div class="sect4">
+<h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current implementation</a></h5>
+<div class="paragraph">
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>stats</code>. The other list commands have similar implementations.</p>
+</div>
+<div class="paragraph">
+<p>(UML here)</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters command <code>stats c/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>StatsCommandParser</code> object. The created object then calls <code>StatsCommandParser.parse("v/food")</code> method.</p>
+</li>
+<li>
+<p><code>StatsCommandParser.parse("v/food")</code> method calls the <code>ArgumentTokenizer.tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
+</li>
+<li>
+<p><code>StatsCommandParse.parse("v/food")</code> method then calls <code>ParserUtil.parseCategory(argMultiMap.getCategory(PREFIX_Category).get())</code> and gets a <code>Category</code> object in return.</p>
+</li>
+<li>
+<p><code>StatsCommandParser</code> will then create a relevant <code>Statistic</code> object.</p>
+</li>
+<li>
+<p>After that, a <code>StatsCommand</code> object is created with the <code>Statistic</code> object as parameter and return to <code>LogicManager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then calls <code>StatsCommand.execute()</code>, which calls <code>Model.getStatistics(Statistics)</code> using the <code>Statistic</code> object created in step 3</p>
+</li>
+<li>
+<p><code>Model.getStatistics(Statistics)</code> will call <code>Statistics.calculate</code> which will generate the appropriate results</p>
+</li>
+<li>
+<p>The result will be shown on the UI</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-consideration-2"><a class="link" href="#design-consideration-2">Design Consideration</a></h5>
+<div class="paragraph">
+<p>Work in Progress</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="budget-feature"><a class="link" href="#budget-feature">3.9. Budget feature</a></h3>
+<div class="paragraph">
+<p>This feature allows users to set budgets for different categories so they can limit the amount spent for each category.</p>
+</div>
+<div class="paragraph">
+<p>How it is implemented:
+User enters the amount they want to limit themselves to for a particular category and specifies the start and end date for their budget.
+For every expense they enter that falls under that category, the totalSpent variable in the Budget class will be updated (coming in v1.3). This information will be displayed to the user so that they can know how much they have spent so far and better plan their future expenses so as not to exceed their budget.</p>
 </div>
 </div>
 </div>
@@ -3957,4 +4050,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 16:03:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 16:25:33 UTC</div></div></div></body></html>
