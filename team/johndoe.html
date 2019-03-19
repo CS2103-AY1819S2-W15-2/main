@@ -265,7 +265,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th expense in the finance tracker. The <code>delete</code> command calls <code>Model#commitFinanceTracker()</code>, causing the modified state of the finance tracker after the <code>delete 5</code> command executes to be saved in the <code>financeTrackerStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted finance tracker state.</p>
+<p>Step 2. The user executes <code>deleteexpense 5</code> command to delete the 5th expense in the finance tracker. The <code>deletexpense</code> command calls <code>Model#commitFinanceTracker()</code>, causing the modified state of the finance tracker after the <code>deleteexpense 5</code> command executes to be saved in the <code>financeTrackerStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted finance tracker state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -273,7 +273,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/cai tao kuey &#8230;&#8203;</code> to add a new expense. The <code>add</code> command also calls <code>Model#commitFinanceTracker()</code>, causing another modified finance tracker state to be saved into the <code>financeTrackerStateList</code>.</p>
+<p>Step 3. The user executes <code>addexpense n/BKT &#8230;&#8203;</code> to add a new expense. The <code>add</code> command also calls <code>Model#commitFinanceTracker()</code>, causing another modified finance tracker state to be saved into the <code>financeTrackerStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -344,7 +344,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitFinanceTracker()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>financeTrackerStateList</code>, all finance tracker states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/cai tao kuey &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clearexpense</code>, which calls <code>Model#commitFinanceTracker()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>financeTrackerStateList</code>, all finance tracker states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>addexpense n/BKT &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -384,7 +384,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the expense being deleted).</p>
+<p>Pros: Will use less memory (e.g. for <code>deleteexpense</code>, just save the expense being deleted).</p>
 </li>
 <li>
 <p>Cons: We must ensure that the implementation of each individual command are correct.</p>
@@ -446,4 +446,4 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-17 17:49:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 16:03:20 UTC</div></div></div></body></html>

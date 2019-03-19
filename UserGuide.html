@@ -23,10 +23,10 @@
 <li><a href="#Commands">4. Commands</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
-<li><a href="#listing-expenses-code-list-code">4.2. Listing expenses : <code>list</code></a></li>
-<li><a href="#adding-an-expense-code-add-code">4.3. Adding an expense: <code>add</code></a></li>
-<li><a href="#editing-an-expense-code-edit-code">4.4. Editing an expense : <code>edit</code></a></li>
-<li><a href="#deleting-an-expense-code-delete-code">4.5. Deleting an expense : <code>delete</code></a></li>
+<li><a href="#listing-expenses-code-listexpense-code">4.2. Listing expenses : <code>listexpense</code></a></li>
+<li><a href="#adding-an-expense-code-addexpense-code">4.3. Adding an expense: <code>addexpense</code></a></li>
+<li><a href="#editing-an-expense-code-editexpense-code">4.4. Editing an expense : <code>editexpense</code></a></li>
+<li><a href="#deleting-an-expense-code-deleteexpense-code">4.5. Deleting an expense : <code>deleteexpense</code></a></li>
 <li><a href="#adding-a-budget-code-addbudget-code">4.6. Adding a budget : <code>addbudget</code></a></li>
 <li><a href="#editing-a-budget-code-editbudget-code">4.7. Editing a budget: <code>editbudget</code></a></li>
 <li><a href="#deleting-a-budget-code-deletebudget-code">4.8. Deleting a budget: <code>deletebudget</code></a></li>
@@ -199,18 +199,13 @@ e.g. When adding an expense, instead of inputting an entire line of command such
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-expenses-code-list-code"><a class="link" href="#listing-expenses-code-list-code">4.2. Listing expenses : <code>list</code></a></h3>
+<h3 id="listing-expenses-code-listexpense-code"><a class="link" href="#listing-expenses-code-listexpense-code">4.2. Listing expenses : <code>listexpense</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of expenses in the finance tracker according to the view specified.<br>
-Format: <code>list v/VIEW</code></p>
+Format: <code>listexpense v/VIEW</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -237,59 +232,40 @@ Format: <code>list v/VIEW</code></p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-an-expense-code-add-code"><a class="link" href="#adding-an-expense-code-add-code">4.3. Adding an expense: <code>add</code></a></h3>
+<h3 id="adding-an-expense-code-addexpense-code"><a class="link" href="#adding-an-expense-code-addexpense-code">4.3. Adding an expense: <code>addexpense</code></a></h3>
 <div class="paragraph">
 <p>Adds an expense to the finance tracker.<br>
-Format 1: <code>add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]</code></p>
+Format 1: <code>addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The AMOUNT <strong>must be a positive integer or decimal of max 2 decimal places.</strong></p>
+<p>The NAME should only contain alphanumeric characters and spaces, and it should not be blank.</p>
 </li>
 <li>
-<p>The CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.</p>
+<p>The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.</p>
 </li>
 <li>
-<p>DATE must be in dd-mm-yyyy format.</p>
+<p>The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.</p>
+</li>
+<li>
+<p>The DATE should be in dd-mm-yyyy format.</p>
 </li>
 <li>
 <p>If DATE is omitted, current date will be used.</p>
 </li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p><code>add n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.</code></p>
-</li>
-<li>
-<p><code>add n/Sofa $/200 c/HOME</code></p>
+<p>If REMARK is omitted, no remarks will be stored.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Format 2: <code>add</code></p>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -298,7 +274,7 @@ Format 1: <code>add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can omit (optional) parameters by leaving them empty.
+You can omit [optional] parameters by leaving them empty.
 </td>
 </tr>
 </table>
@@ -309,7 +285,23 @@ You can omit (optional) parameters by leaving them empty.
 <div class="ulist">
 <ul>
 <li>
-<p><code>add</code><br>
+<p><code>addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.</code></p>
+</li>
+<li>
+<p><code>addexpense n/Sofa $/200 c/HOME</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format 2: <code>addexpense</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addexpense</code><br>
 <code>Please enter the name of the expense: BKT</code><br>
 <code>Please enter the amount of the expense: 3.00</code><br>
 <code>Please enter the category of the expense: food</code><br>
@@ -320,22 +312,20 @@ You can omit (optional) parameters by leaving them empty.
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-expense-code-edit-code"><a class="link" href="#editing-an-expense-code-edit-code">4.4. Editing an expense : <code>edit</code></a></h3>
+<h3 id="editing-an-expense-code-editexpense-code"><a class="link" href="#editing-an-expense-code-editexpense-code">4.4. Editing an expense : <code>editexpense</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing expense in the finance tracker.<br>
-Format 1: <code>edit INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]</code></p>
+Format 1: <code>editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the expense at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed expense list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the expense at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed expense list. The index must be a positive integer.</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -345,23 +335,7 @@ Format 1: <code>edit INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]<
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit 9 $/450 c/food</code><br>
-Edits the amount and category of the 9th expense to be <code>450</code> and <code>food</code> respectively.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Format 2: <code>edit INDEX</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -370,47 +344,7 @@ Edits the amount and category of the 9th expense to be <code>450</code> and <cod
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:
-<code>edit 9</code><br>
-<code>Please enter the name of the expense to be updated (optional):</code><br>
-<code>Please enter the amount of the expense to be updated (optional): 450</code><br>
-<code>Please enter the category of the expense to be updated (optional): food</code><br>
-<code>Please enter the date of the expense to be updated (optional):</code><br>
-<code>Please enter the remark of the expense to be updated (optional):</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-an-expense-code-delete-code"><a class="link" href="#deleting-an-expense-code-delete-code">4.5. Deleting an expense : <code>delete</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified expense from the finance tracker.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the expense at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed expense list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
+You can omit [optional] parameters by leaving them empty. If all parameters are empty, no edits will occur.
 </td>
 </tr>
 </table>
@@ -421,8 +355,52 @@ Format: <code>delete INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
+<p><code>editexpense 9 $/450 c/food</code><br>
+Edits the amount and category of the 9th expense to be <code>450</code> and <code>food</code> respectively.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format 2: <code>editexpense INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:
+<code>editexpense 9</code><br>
+<code>Please enter the name of the expense to be updated (optional):</code><br>
+<code>Please enter the amount of the expense to be updated (optional): 450</code><br>
+<code>Please enter the category of the expense to be updated (optional): food</code><br>
+<code>Please enter the date of the expense to be updated (optional):</code><br>
+<code>Please enter the remark of the expense to be updated (optional):</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-expense-code-deleteexpense-code"><a class="link" href="#deleting-an-expense-code-deleteexpense-code">4.5. Deleting an expense : <code>deleteexpense</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified expense from the finance tracker.<br>
+Format: <code>deleteexpense INDEX</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the expense at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed expense list. The index must be a positive integer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p><code>list</code><br>
-<code>delete 2</code><br>
+<code>deleteexpense 2</code><br>
 Deletes the 2nd expense in the finance tracker.</p>
 </li>
 </ul>
@@ -434,27 +412,25 @@ Deletes the 2nd expense in the finance tracker.</p>
 <p>Adds a budget with a time frame to the tracker.<br>
 Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
-“entertainment” and “others” which are case insensitive.</p>
+<p>There is only one budget for each category.</p>
 </li>
 <li>
-<p>The program only limits one budget for each category.</p>
+<p>The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.</p>
+</li>
+<li>
+<p>The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.</p>
+</li>
+<li>
+<p>The START_DATE and END_DATE should be in dd-mm-yyyy format.</p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -465,7 +441,7 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <p><code>addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019</code></p>
 </li>
 <li>
-<p><code>addbudget c/all $/12000 sd/1-1-2019 ed/31-12-2019</code></p>
+<p><code>addbudget c/others $/12000 sd/1-1-2019 ed/31-12-2019</code></p>
 </li>
 </ul>
 </div>
@@ -481,7 +457,7 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <p><code>addbudget</code><br>
 <code>Please enter the category of the budget: food</code><br>
 <code>Please enter the amount of the budget: 400</code><br>
-<code>Please enter the start date of budget: 1-2-2019</code><br>
+<code>Please enter the start date of budget: 01-2-2019</code><br>
 <code>Please enter the end date of budget: 28-2-2019</code></p>
 </li>
 </ul>
@@ -490,10 +466,25 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <div class="sect2">
 <h3 id="editing-a-budget-code-editbudget-code"><a class="link" href="#editing-a-budget-code-editbudget-code">4.7. Editing a budget: <code>editbudget</code></a></h3>
 <div class="paragraph">
-<p>Edits a budget in the finance tracker.</p>
+<p>Edits a budget in the finance tracker.<br>
+Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]</code></p>
 </div>
-<div class="paragraph">
-<p>Format 1: <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]</code></p>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the budget of the specified <code>CATEGORY</code>.</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -504,10 +495,10 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <p><code>editbudget c/food $/500</code></p>
 </li>
 <li>
-<p><code>editbudget c/all ed/31-3-2019</code></p>
+<p><code>editbudget c/shopping ed/31-3-2019</code></p>
 </li>
 <li>
-<p><code>editbudget c/all $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
+<p><code>editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
 </li>
 </ul>
 </div>
@@ -530,6 +521,17 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <div class="paragraph">
 <p>Deletes a budget from the finance tracker.</p>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the budget of the specified <code>CATEGORY</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Format: <code>deletebudget c/CATEGORY</code></p>
 </div>
@@ -547,22 +549,18 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <div class="sect2">
 <h3 id="listing-debts-code-listdebt-code"><a class="link" href="#listing-debts-code-listdebt-code">4.9. Listing debts: <code>listdebt</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of debts in the finance tracker according to the view specified.</p>
+<p>Shows a list of debts in the finance tracker according to the view specified.
+Format: <code>listdebt [v/VIEW]</code></p>
 </div>
-<div class="paragraph">
-<p>Format: <code>listdebt [v/VIEW]</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The VIEW specifies how the list of expenses are displayed.</p>
+<p>If VIEW is omitted, all debts are listed.</p>
+</li>
+<li>
+<p>The VIEW specifies how the list of debts is displayed.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -576,9 +574,7 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -589,26 +585,37 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <div class="paragraph">
 <p>Format 1: <code>adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>AMOUNT_OWED <strong>must be a positive integer or decimal of max 2 decimal places.</strong></p>
+<p>The PERSON_OWED should only contain alphanumeric characters and spaces, and it should not be blank.</p>
 </li>
 <li>
-<p>CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.</p>
+<p>The AMOUNT_OWED should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.</p>
 </li>
 <li>
-<p>DEADLINE must be in dd-mm-yyyy format.</p>
+<p>The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.</p>
+</li>
+<li>
+<p>The DEADLINE should be in dd-mm-yyyy format.</p>
+</li>
+<li>
+<p>If REMARK is omitted, no remarks will be stored.</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty.
 </td>
 </tr>
 </table>
@@ -629,18 +636,6 @@ Format 1: <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code></
 <div class="paragraph">
 <p>Format 2: <code>adddebt</code></p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can omit (optional) parameters by leaving them empty.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -660,22 +655,18 @@ You can omit (optional) parameters by leaving them empty.
 <div class="sect2">
 <h3 id="editing-a-debt-code-editdebt-code"><a class="link" href="#editing-a-debt-code-editdebt-code">4.11. Editing a debt: <code>editdebt</code></a></h3>
 <div class="paragraph">
-<p>Edits debt at specified INDEX based on latest debt list shown and updates values of parameters.</p>
+<p>Edits an existing debt in the finance tracker.<br>
+Format 1: <code>editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]</code></p>
 </div>
-<div class="paragraph">
-<p>Format 1: <code>editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the debt at the specified INDEX. The index refers to the index number shown in the displayed debt list. The index <strong>must be a positive integer</strong> 1, 2, 3, …​</p>
+<p>Edits the debt at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed expense list. The index must be a positive integer.</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -685,6 +676,16 @@ You can omit (optional) parameters by leaving them empty.
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit [optional] parameters by leaving them empty. If all parameters are empty, no edits will occur.
 </td>
 </tr>
 </table>
@@ -703,18 +704,6 @@ Edits expense owed and amount owed of the 5th debt to be <code>Tommy</code> and 
 <div class="paragraph">
 <p>Format 2: <code>editdebt</code></p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -722,7 +711,7 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 <ul>
 <li>
 <p><code>editdebt 5</code><br>
-<code>Please enter the updated name of the expense you owed (optional): Tommy</code><br>
+<code>Please enter the updated name of the debt you owed (optional): Tommy</code><br>
 <code>Please enter the updated amount owed (optional): 60.00</code><br>
 <code>Please enter the updated category (optional):</code><br>
 <code>Please enter the updated deadline of the debt (optional):</code><br>
@@ -737,29 +726,19 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 <p>Deletes the specified debt from the finance tracker.
 Format: <code>deletedebt INDEX</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the debt at the specified INDEX.</p>
+<p>Deletes the debt at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed debt list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, …​</p>
+<p>The index refers to the index number shown in the displayed expense list. The index must be a positive integer.</p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -777,46 +756,52 @@ Deletes the 5th debt in the finance tracker.</p>
 <div class="sect2">
 <h3 id="paying-off-a-debt-code-paydebt-code"><a class="link" href="#paying-off-a-debt-code-paydebt-code">4.13. Paying off a debt: <code>paydebt</code></a></h3>
 <div class="paragraph">
-<p>Convert the debt record to an expense.</p>
+<p>Converts the specified debt into an expense.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>paydebt INDEX [d/DATE]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Parameters from debt will be carried over to expense</p>
+<p>Converts the debt at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>NAME will be entered as “Debt to PERSON_OWED”</p>
+<p>The index refers to the index number shown in the displayed expense list. The index must be a positive integer.</p>
 </li>
 <li>
-<p>AMOUNT will be entered as “AMOUNT_OWED”</p>
+<p>After converting the debt into an expense, the debt is deleted.</p>
 </li>
 <li>
-<p>CATEGORY will carry over as such</p>
+<p>The following parameters from debt will be carried over to expense:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The NAME will be entered as “Debt to PERSON_OWED”.</p>
 </li>
 <li>
-<p>DESCRIPTION will carry over as such</p>
+<p>The AMOUNT will be entered as “AMOUNT_OWED”.</p>
 </li>
 <li>
-<p>DATE must be in dd-mm-yyyy format and can be used to indicate actual day when user paid off the debt</p>
+<p>The CATEGORY will carry over as indicated in the debt.</p>
 </li>
 <li>
-<p>If DATE is omitted, current date will be used</p>
+<p>The REMARKS will carry over as indicated in the debt.</p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
+</li>
+<li>
+<p>The DATE should be in dd-mm-yyyy format and can be used to indicate actual day when user paid off the debt.</p>
+</li>
+<li>
+<p>If DATE is omitted, current date will be used.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -837,34 +822,48 @@ Converts the 3rd debt in the finance tracker into an expense.</p>
 <p>Adds a recurring payment to the finance tracker.</p>
 </div>
 <div class="paragraph">
-<p>Format 1: <code>addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE</code></p>
+<p>Format 1: <code>addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>AMOUNT <strong>must be a positive integer or decimal of max 2 decimal places.</strong></p>
+<p>The NAME should only contain alphanumeric characters and spaces, and it should not be blank.</p>
 </li>
 <li>
-<p>CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.</p>
+<p>The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.</p>
 </li>
 <li>
-<p>STARTDATE must be in dd-mm-yyyy format.</p>
+<p>The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.</p>
 </li>
 <li>
-<p>If STARTDATE is omitted, current date will be used.</p>
+<p>The START_DATE should be in dd-mm-yyyy format.</p>
 </li>
 <li>
-<p>FREQUENCY only consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).</p>
+<p>If START_DATE is omitted, current date will be used.</p>
+</li>
+<li>
+<p>If REMARK is omitted, no remarks will be stored.</p>
+</li>
+<li>
+<p>The FREQUENCY should consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).</p>
+</li>
+<li>
+<p>The OCCURRENCE should be a number from 1 to 999 inclusive.</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty.
 </td>
 </tr>
 </table>
@@ -884,18 +883,6 @@ Converts the 3rd debt in the finance tracker into an expense.</p>
 </div>
 <div class="paragraph">
 <p>Format 2: <code>addrecurring</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can omit (optional) parameters by leaving them empty.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -919,37 +906,52 @@ You can omit (optional) parameters by leaving them empty.
 <h3 id="editing-a-recurring-code-editrecurring-code"><a class="link" href="#editing-a-recurring-code-editrecurring-code">4.15. Editing a recurring : <code>editrecurring</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing recurring in the finance tracker.<br>
-Format 1: <code>editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code><br></p>
+Format 1: <code>editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code><br></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the expense at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed expense list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the recurring at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
 </li>
 <li>
-<p>EDITPASTOPTION can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.</p>
-</li>
+<p>EDITPASTOPTION should only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.</p>
+<div class="ulist">
+<ul>
 <li>
 <p>Agreeing (Y) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while also changing old expenses already added by this recurring.</p>
 </li>
 <li>
 <p>Disagreeing (N) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while old expenses already added by this recurring will not be changed.</p>
 </li>
+</ul>
+</div>
+</li>
+<li>
+<p>If EDITPASTOPTION is omitted, it defaults to N.</p>
+</li>
 <li>
 <p>Existing values will be updated to the input values.</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
 </td>
 </tr>
 </table>
@@ -966,23 +968,12 @@ Edits the amount and category of the 9th recurring to be <code>450</code> and <c
 </ul>
 </div>
 <div class="paragraph">
-<p>Format 2: <code>editrecurring INDEX p/EDITPASTOPTION</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
-</td>
-</tr>
-</table>
+<p>Format 2: <code>editrecurring INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:
-<code>editrecurring 9 p/N</code><br>
+<code>editrecurring 9</code><br>
+<code>Do you wish to edit previous expenses added by this recurring?:</code><br>
 <code>Please enter the name of the recurring to be updated (optional):</code><br>
 <code>Please enter the amount of the recurring to be updated (optional): 450</code><br>
 <code>Please enter the category of the recurring to be updated (optional): food</code><br>
@@ -996,29 +987,25 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 <h3 id="deleting-a-recurring-code-deleterecurring-code"><a class="link" href="#deleting-a-recurring-code-deleterecurring-code">4.16. Deleting a recurring: <code>deleterecurring</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified recurring from the finance tracker.<br>
-Format: <code>deleterecurring INDEX p/DELETEPASTOPTION</code><br></p>
+Format: <code>deleterecurring INDEX [p/DELETEPASTOPTION]</code><br></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
 <p>Deletes the recurring at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed recurring list.</p>
+<p>The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>At least one of the optional fields must be provided.</p>
 </li>
 <li>
-<p>DELETEPASTOPTION can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.</p>
-</li>
+<p>The DELETEPASTOPTION should only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.</p>
+<div class="ulist">
+<ul>
 <li>
 <p>Agreeing (Y) will delete the recurring, and delete all old expenses already added by this recurring.</p>
 </li>
@@ -1027,6 +1014,22 @@ Format: <code>deleterecurring INDEX p/DELETEPASTOPTION</code><br></p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>If DELETEPASTOPTION is omitted, it defaults to N.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
 </td>
 </tr>
 </table>
@@ -1484,24 +1487,6 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]</code><br>
-e.g. <code>add n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake</code></p>
-</li>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]</code><br>
-e.g. <code>edit 2 n/Bak Kut Teh</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
@@ -1514,16 +1499,37 @@ e.g. <code>edit 2 n/Bak Kut Teh</code></p>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
 <li>
+<p><strong>List expenses</strong> : <code>listexpense</code></p>
+</li>
+<li>
+<p><strong>Add an expense</strong> <code>addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]</code><br>
+e.g. <code>addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake</code></p>
+</li>
+<li>
+<p><strong>Edit an expense</strong> : <code>editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]</code><br>
+e.g. <code>editexpense 2 n/Bak Kut Teh</code></p>
+</li>
+<li>
+<p><strong>Delete an expense</strong> : <code>deleteexpense INDEX</code><br>
+e.g. <code>deleteexpense 3</code></p>
+</li>
+<li>
+<p><strong>Clear expenses</strong> : <code>clearexpense</code></p>
+</li>
+<li>
 <p><strong>Add a budget</strong> : <code>addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE</code><br>
 e.g. <code>addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019</code></p>
 </li>
 <li>
 <p><strong>Edit a budget</strong> : <code>editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]</code><br>
-e.g. <code>editbudget c/all $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
+e.g. <code>editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019</code></p>
 </li>
 <li>
 <p><strong>Delete a budget</strong> : <code>deletebudget c/CATEGORY</code><br>
 e.g. <code>deletebudget c/food</code></p>
+</li>
+<li>
+<p><strong>List debts</strong> : <code>listdebt [v/VIEW]</code></p>
 </li>
 <li>
 <p><strong>Add a debt</strong> : <code>adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]</code><br>
@@ -1532,9 +1538,6 @@ e.g. <code>adddebt n/Jane Doe $/200 c/FOOD</code></p>
 <li>
 <p><strong>Edit a debt</strong> : <code>editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]</code><br>
 e.g. <code>editdebt 5 n/Tommy $/60</code></p>
-</li>
-<li>
-<p><strong>List debts</strong> : <code>listdebt [v/VIEW]</code></p>
 </li>
 <li>
 <p><strong>Delete a debt</strong> : <code>deletedebt INDEX</code><br>
@@ -1549,11 +1552,11 @@ e.g. <code>payDebt 2</code></p>
 e.g. <code>addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24</code><br></p>
 </li>
 <li>
-<p><strong>Edit a recurring</strong> : <code>editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code><br>
+<p><strong>Edit a recurring</strong> : <code>editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code><br>
 e.g. <code>editrecurring 9 p/N $/450 c/food</code><br></p>
 </li>
 <li>
-<p><strong>Delete a recurring</strong> : <code>deleterecurring INDEX p/DELETEPASTOPTION</code><br>
+<p><strong>Delete a recurring</strong> : <code>deleterecurring INDEX [p/DELETEPASTOPTION]</code><br>
 e.g. <code>deleterecurring 2 p/N</code><br></p>
 </li>
 <li>
@@ -1573,4 +1576,4 @@ e.g. <code>stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-17 17:49:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-19 16:03:20 UTC</div></div></div></body></html>
