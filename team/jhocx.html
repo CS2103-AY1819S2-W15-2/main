@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Johnson Ho Chong Xiang - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Johnson Ho Chong Xiang - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-personal-finance-tracker"><a class="link" href="#project-personal-finance-tracker">PROJECT: Personal Finance Tracker</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This portfolio aims to document the contributions made by Johnson Ho Chong Xiang to the Personal Finance Tracker.</p>
+</div>
+<div class="paragraph">
+<p>Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an <a href="https://github.com/nus-cs2103-AY1819S2/addressbook-level4">Address Book</a> over a period of 8 weeks under the constraints described <a href="https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to manage recurring expenses in the finance tracker application</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to add, edit, delete recurrings, as well as easily convert these recurrings into an expense at appropriate times. Integrated to work with current undo/redo, history and list commands.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their recurring expenses, expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees.</p>
+</li>
+<li>
+<p>Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving recurring expenses.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jhocx&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-03-26&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">code collated by reposense</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Check all pull requests done by group mates</p>
+</li>
+<li>
+<p>Create issues for tracking in GitHub Issue Tracker</p>
+</li>
+<li>
+<p>In charge of code in storage component</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Update storage component in Developer&#8217;s Guide</p>
+</li>
+<li>
+<p>Added the implementation of recurrings in Developer&#8217;s Guide</p>
+</li>
+<li>
+<p>In charge of UserGuide in general.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="listing-recurrings-code-listrecurring-code"><a class="link" href="#listing-recurrings-code-listrecurring-code">Listing recurrings : <code>listrecurring</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of recurrings in the finance tracker according to the view specified.<br>
+Format: <code>listrecurring v/VIEW</code><br>
+Shortcut: <code>lr v/VIEW</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The VIEW specifies how the list of recurrings are displayed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>v/all: displays entire list of recurrings</p>
+</li>
+<li>
+<p>v/day: displays list of recurrings added since a day ago</p>
+</li>
+<li>
+<p>v/month: displays list of recurrings added since a month ago</p>
+</li>
+<li>
+<p>v/year: displays list of recurrings added since a year ago</p>
+</li>
+<li>
+<p>v/CATEGORY: displays list of recurrings with CATEGORY</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-recurring-code-addrecurring-code"><a class="link" href="#adding-a-recurring-code-addrecurring-code">Adding a recurring: <code>addrecurring</code></a></h3>
+<div class="paragraph">
+<p>Adds a recurring payment to the finance tracker.<br>
+Format: <code>addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE</code><br>
+Shortcut: <code>ar n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The NAME should only contain alphanumeric characters and spaces, and it should not be blank.</p>
+</li>
+<li>
+<p>The AMOUNT should only contain positive numbers and reflect the value in dollars. Values accepted are in the range of $0.01 to $9,999,999.99. A maximum of 2 decimal places are allowed.</p>
+</li>
+<li>
+<p>The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.</p>
+</li>
+<li>
+<p>The START_DATE should be in dd-mm-yyyy format.</p>
+</li>
+<li>
+<p>If START_DATE is omitted, current date will be used.</p>
+</li>
+<li>
+<p>If REMARK is omitted, no remarks will be stored.</p>
+</li>
+<li>
+<p>The FREQUENCY should consists of D, W, M, Y for daily, weekly, monthly and yearly respectively.</p>
+</li>
+<li>
+<p>The OCCURRENCE should be a number from 1 to 999 inclusive.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24</code><br></p>
+</li>
+<li>
+<p><code>ar n/Magazine Subscription $/20 c/utilities f/M o/12</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-recurring-code-editrecurring-code"><a class="link" href="#editing-a-recurring-code-editrecurring-code">Editing a recurring : <code>editrecurring</code></a></h3>
+<div class="paragraph">
+<p>Edits an existing recurring in the finance tracker.<br>
+Format: <code>editrecurring INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code><br>
+Shortcut: <code>er INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the recurring at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editrecurring 9 $/450 c/food</code><br>
+Edits the amount and category of the 9th recurring to be <code>450</code> and <code>food</code> respectively.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-recurring-code-deleterecurring-code"><a class="link" href="#deleting-a-recurring-code-deleterecurring-code">Deleting a recurring: <code>deleterecurring</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified recurring from the finance tracker.<br>
+Format: <code>deleterecurring INDEX</code><br>
+Shortcut: <code>dr INDEX</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the recurring at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listrecurring v/all</code><br>
+<code>deleterecurring 2</code><br>
+Deletes the 2nd recurring in the finance tracker.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-recurrings-code-clearrecurring-code"><a class="link" href="#clearing-all-recurrings-code-clearrecurring-code">Clearing all recurrings: <code>clearrecurring</code></a></h3>
+<div class="paragraph">
+<p>Clears all recurrings from the finance tracker.<br>
+Format: <code>clearrecurring</code><br>
+Shortcut: <code>cr</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="converting-outstanding-expenses-from-all-recurrings-code-convertrecurring-code"><a class="link" href="#converting-outstanding-expenses-from-all-recurrings-code-convertrecurring-code">Converting outstanding expenses from all recurrings: <code>convertrecurring</code></a></h3>
+<div class="paragraph">
+<p>Converts all outstanding expenses from all recurrings in the finance tracker.<br>
+Format: <code>convertrecurring</code><br>
+Shortcut: <code>cre</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:52:46 UTC</div></div></div></body></html>

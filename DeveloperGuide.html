@@ -1,78 +1,80 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Personal Finance Tracker</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><meta name="author" content="=== Listing Feature"><title>Personal Finance Tracker - Developer Guide</title><link rel="stylesheet" href="./gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Personal Finance Tracker</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Personal Finance Tracker - Developer Guide</h1><div class="details"><span class="author" id="author">=== Listing Feature</span><br></div></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>CS2103-AY1819S2-W15-2</code>      Since: <code>Feb 2019</code></p>
+<p>This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.</p>
+</div>
+<div class="paragraph">
+<p>Listing feature consists of <code>listexpense</code>, <code>listrecurring</code> and <code>listdebt</code>.</p>
+</div>
+<div class="paragraph">
+<p>This implementation is under Logic and Model components.</p>
 </div>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle"></div>
-<ul class="sectlevel1">
-<li><a href="#setting-up">1. Setting up</a>
+<ul class="sectlevel3">
+<li><a href="#current-implementation">1. Current implementation</a></li>
+<li><a href="#design-consideration">2. Design Consideration</a></li>
+<li><a href="#setting-up">3. Setting up</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">1.1. Prerequisites</a></li>
-<li><a href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></li>
-<li><a href="#verifying-the-setup">1.3. Verifying the setup</a></li>
-<li><a href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></li>
+<li><a href="#prerequisites">3.1. Prerequisites</a></li>
+<li><a href="#setting-up-the-project-in-your-computer">3.2. Setting up the project in your computer</a></li>
+<li><a href="#verifying-the-setup">3.3. Verifying the setup</a></li>
+<li><a href="#configurations-to-do-before-writing-code">3.4. Configurations to do before writing code</a></li>
 </ul>
 </li>
-<li><a href="#design">2. Design</a>
+<li><a href="#design">4. Design</a>
 <ul class="sectlevel2">
-<li><a href="#Design-Architecture">2.1. Architecture</a></li>
-<li><a href="#Design-Ui">2.2. UI component</a></li>
-<li><a href="#Design-Logic">2.3. Logic component</a></li>
-<li><a href="#Design-Model">2.4. Model component</a></li>
-<li><a href="#Design-Storage">2.5. Storage component</a></li>
-<li><a href="#Design-Commons">2.6. Common classes</a></li>
+<li><a href="#Design-Architecture">4.1. Architecture</a></li>
+<li><a href="#Design-Ui">4.2. UI component</a></li>
+<li><a href="#Design-Logic">4.3. Logic component</a></li>
+<li><a href="#Design-Model">4.4. Model component</a></li>
+<li><a href="#Design-Storage">4.5. Storage component</a></li>
+<li><a href="#Design-Commons">4.6. Common classes</a></li>
 </ul>
 </li>
-<li><a href="#implementation">3. Implementation</a>
+<li><a href="#implementation">5. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#listing-feature">3.5. Listing Feature</a></li>
-<li><a href="#recurring-feature">3.6. Recurring Feature</a></li>
-<li><a href="#pay-debt-function">3.7. Pay Debt Function</a></li>
-<li><a href="#statistics-feature">3.8. Statistics Feature</a></li>
-<li><a href="#budget-feature">3.9. Budget feature</a></li>
+<li><a href="#undo-redo-feature">5.1. Undo/Redo feature</a></li>
+<li><a href="#logging">5.2. Logging</a></li>
+<li><a href="#Implementation-Configuration">5.3. Configuration</a></li>
+<li><a href="#listing-feature">5.4. Listing Feature</a></li>
+<li><a href="#recurring-feature">5.5. Recurring Feature</a></li>
+<li><a href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">5.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></li>
+<li><a href="#debt-feature">5.7. Debt Feature</a></li>
+<li><a href="#statistics-feature">5.8. Statistics Feature</a></li>
 </ul>
 </li>
-<li><a href="#documentation">4. Documentation</a>
+<li><a href="#documentation">6. Documentation</a>
 <ul class="sectlevel2">
-<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
-<li><a href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></li>
-<li><a href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></li>
-<li><a href="#site-template">4.6. Site Template</a></li>
+<li><a href="#editing-documentation">6.1. Editing Documentation</a></li>
+<li><a href="#publishing-documentation">6.2. Publishing Documentation</a></li>
+<li><a href="#converting-documentation-to-pdf-format">6.3. Converting Documentation to PDF format</a></li>
+<li><a href="#Docs-SiteWideDocSettings">6.4. Site-wide Documentation Settings</a></li>
+<li><a href="#Docs-PerFileDocSettings">6.5. Per-file Documentation Settings</a></li>
+<li><a href="#site-template">6.6. Site Template</a></li>
 </ul>
 </li>
-<li><a href="#Testing">5. Testing</a>
+<li><a href="#Testing">7. Testing</a>
 <ul class="sectlevel2">
-<li><a href="#running-tests">5.1. Running Tests</a></li>
-<li><a href="#types-of-tests">5.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
+<li><a href="#running-tests">7.1. Running Tests</a></li>
+<li><a href="#types-of-tests">7.2. Types of tests</a></li>
+<li><a href="#troubleshooting-testing">7.3. Troubleshooting Testing</a></li>
 </ul>
 </li>
-<li><a href="#dev-ops">6. Dev Ops</a>
+<li><a href="#dev-ops">8. Dev Ops</a>
 <ul class="sectlevel2">
-<li><a href="#build-automation">6.1. Build Automation</a></li>
-<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
-<li><a href="#coverage-reporting">6.3. Coverage Reporting</a></li>
-<li><a href="#documentation-previews">6.4. Documentation Previews</a></li>
-<li><a href="#making-a-release">6.5. Making a Release</a></li>
-<li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
+<li><a href="#build-automation">8.1. Build Automation</a></li>
+<li><a href="#continuous-integration">8.2. Continuous Integration</a></li>
+<li><a href="#coverage-reporting">8.3. Coverage Reporting</a></li>
+<li><a href="#documentation-previews">8.4. Documentation Previews</a></li>
+<li><a href="#making-a-release">8.5. Making a Release</a></li>
+<li><a href="#managing-dependencies">8.6. Managing Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a>
-<ul class="sectlevel2">
-<li><a href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></li>
-<li><a href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></li>
-</ul>
-</li>
+<li><a href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a></li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
 <li><a href="#use-cases">Appendix D: Use Cases</a>
@@ -87,17 +89,91 @@
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-an-expense">H.2. Deleting an expense</a></li>
-<li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#adding-a-budget-2">H.3. Adding a budget</a></li>
+<li><a href="#editing-a-debt">H.4. Editing a debt</a></li>
+<li><a href="#adding-a-recurring-expense">H.5. Adding a recurring expense</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">1. Current implementation</a></h4>
+<div class="paragraph">
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>listexpense</code>. The other list commands have similar implementations.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListExpenseSequenceDiagram.png" alt="ListExpenseSequenceDiagram" width="800">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters command <code>listexpense v/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>ListExpenseCommandParser</code> object. The created object then calls <code>ListExpenseCommandParser#parse("v/food")</code> method.</p>
+</li>
+<li>
+<p><code>ListExpenseCommandParser#parse("v/food")</code> method calls the <code>ArgumentTokenizer#tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
+</li>
+<li>
+<p><code>ListExpenseCommandParse#parse("v/food")</code> method then calls <code>ParserUtil#parseView(argMultiMap#getValue(PREFIX_VIEW)#get())</code> and gets a <code>View</code> object in return.</p>
+</li>
+<li>
+<p>After that, a  <code>ListExpenseCommand</code> object is created with the <code>View</code> object as parameter and return to <code>LogicManager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then calls <code>ListExpenseCommand#execute()</code>, which calls <code>Model#updateFilteredExpense(predicate)</code>, where predicate is obtained from calling the <code>ListExpenseCommand#getPredicate(view)</code>. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.</p>
+</li>
+<li>
+<p>Finally, the expense list panel will show the new set of expenses. A <code>CommandResult</code> is then created and returned to <code>LogicManager</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">2. Design Consideration</a></h4>
+<div class="paragraph">
+<p>This feature can be implemented in different ways in terms of how the specified expenses are filtered out. The alternative ways of implementation are shown below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1 (current choice): Go through all expenses in the <code>FinanceTracker</code> and filter out those that are under the specified view.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement. The original architecture is preserved.</p>
+</li>
+<li>
+<p>Cons: Time-consuming. Large number of expenses in FinanceTracker will take longer time to filter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Store expenses in separate files based on different views. Only check files under the specified view when filtering.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More efficient. Will not go through every single expense.</p>
+</li>
+<li>
+<p>Cons: Will need to alter the original architecture. More storage space will be needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By: <code>CS2103-AY1819S2-W15-2</code>      Since: <code>Feb 2019</code></p>
+</div>
+</div>
 <div class="sect1">
-<h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
+<h2 id="setting-up"><a class="link" href="#setting-up">3. Setting up</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prerequisites"><a class="link" href="#prerequisites">1.1. Prerequisites</a></h3>
+<h3 id="prerequisites"><a class="link" href="#prerequisites">3.1. Prerequisites</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -136,7 +212,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></h3>
+<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">3.2. Setting up the project in your computer</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -194,7 +270,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">1.3. Verifying the setup</a></h3>
+<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">3.3. Verifying the setup</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -207,9 +283,9 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></h3>
+<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">3.4. Configurations to do before writing code</a></h3>
 <div class="sect3">
-<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">1.4.1. Configuring the coding style</a></h4>
+<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">3.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
 <p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify,</p>
 </div>
@@ -241,12 +317,12 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
+<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">3.4.2. Updating documentation to match your fork</a></h4>
 <div class="paragraph">
-<p>After forking the repo, the documentation will still have the SE-EDU branding and refer to the <code>se-edu/addressbook-level4</code> repo.</p>
+<p>After forking the repo, the documentation will still refer to the <code>CS2103-AY1819S2-W15-2/main</code> repo.</p>
 </div>
 <div class="paragraph">
-<p>If you plan to develop this fork as a separate product (i.e. instead of contributing to <code>se-edu/addressbook-level4</code>), you should do the following:</p>
+<p>If you plan to develop this fork as a separate product (i.e. instead of contributing to <code>CS2103-AY1819S2-W15-2/main</code>), you should do the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -260,7 +336,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">1.4.3. Setting up CI</a></h4>
+<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">3.4.3. Setting up CI</a></h4>
 <div class="paragraph">
 <p>Set up Travis to perform Continuous Integration (CI) for your fork. See <a href="UsingTravis.html">UsingTravis.adoc</a> to learn how to set it up.</p>
 </div>
@@ -296,14 +372,14 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect3">
-<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.4. Getting started with coding</a></h4>
+<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">3.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
 <p>When you are ready to start coding,</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
+<p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 4.1, &#8220;Architecture&#8221;</a>.</p>
 </li>
 <li>
 <p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
@@ -315,10 +391,10 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect1">
-<h2 id="design"><a class="link" href="#design">2. Design</a></h2>
+<h2 id="design"><a class="link" href="#design">4. Design</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.1. Architecture</a></h3>
+<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">4.1. Architecture</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
@@ -420,7 +496,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.2. UI component</a></h3>
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">4.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
@@ -451,7 +527,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.3. Logic component</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">4.3. Logic component</a></h3>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
@@ -492,7 +568,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
+<h3 id="Design-Model"><a class="link" href="#Design-Model">4.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
@@ -523,10 +599,10 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">4.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+<img src="images/StorageClassDiagram1.png" alt="StorageClassDiagram1" width="800">
 </div>
 <div class="title">Figure 8. Structure of the Storage Component</div>
 </div>
@@ -548,7 +624,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">4.6. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.address.commons</code> package.</p>
 </div>
@@ -556,15 +632,15 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
+<h2 id="implementation"><a class="link" href="#implementation">5. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">5.1. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">5.1.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedFinanceTracker</code>.
 It extends <code>FinanceTracker</code> with an undo/redo history, stored internally as a <code>financeTrackerStateList</code> and <code>currentStatePointer</code>.
@@ -606,7 +682,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>addexpense n/BKT &#8230;&#8203;</code> to add a new expense. The <code>add</code> command also calls <code>Model#commitFinanceTracker()</code>, causing another modified finance tracker state to be saved into the <code>financeTrackerStateList</code>.</p>
+<p>Step 3. The user executes <code>addexpense n/BKT &#8230;&#8203;</code> to add a new expense. The <code>addexpense</code> command also calls <code>Model#commitFinanceTracker()</code>, causing another modified finance tracker state to be saved into the <code>financeTrackerStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -669,7 +745,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the finance tracker, such as <code>list</code>, will usually not call <code>Model#commitFinanceTracker()</code>, <code>Model#undoFInanceTracker()</code> or <code>Model#redoFinanceTracker()</code>. Thus, the <code>financeTrackerStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>listexpense v/all</code>. Commands that do not modify the finance tracker, such as <code>listexpense</code>, will usually not call <code>Model#commitFinanceTracker()</code>, <code>Model#undoFInanceTracker()</code> or <code>Model#redoFinanceTracker()</code>. Thus, the <code>financeTrackerStateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -694,7 +770,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -720,7 +796,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>Pros: Will use less memory (e.g. for <code>deleteexpense</code>, just save the expense being deleted).</p>
 </li>
 <li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+<p>Cons: We must ensure that the implementation of each individual command is correct.</p>
 </li>
 </ul>
 </div>
@@ -764,20 +840,14 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">5.2. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 5.3, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -808,24 +878,24 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">5.3. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-feature"><a class="link" href="#listing-feature">3.5. Listing Feature</a></h3>
+<h3 id="listing-feature"><a class="link" href="#listing-feature">5.4. Listing Feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.</p>
 </div>
 <div class="paragraph">
-<p>Listing feature consists of <code>listexpense</code>, <code>listrecurring</code>, <code>listbudget</code> and <code>listdebt</code>.</p>
+<p>Listing feature consists of <code>listexpense</code>, <code>listrecurring</code> and <code>listdebt</code>.</p>
 </div>
 <div class="paragraph">
 <p>This implementation is under Logic and Model components.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.5.1. Current implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">5.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>listexpense</code>. The other list commands have similar implementations.</p>
 </div>
@@ -837,19 +907,19 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User enters command <code>listexpense v/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>ListExpenseCommandParser</code> object. The created object then calls <code>ListExpenseCommandParser.parse("v/food")</code> method.</p>
+<p>User enters command <code>listexpense v/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>ListExpenseCommandParser</code> object. The created object then calls <code>ListExpenseCommandParser#parse("v/food")</code> method.</p>
 </li>
 <li>
-<p><code>ListExpenseCommandParser.parse("v/food")</code> method calls the <code>ArgumentTokenizer.tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
+<p><code>ListExpenseCommandParser#parse("v/food")</code> method calls the <code>ArgumentTokenizer#tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
 </li>
 <li>
-<p><code>ListExpenseCommandParse.parse("v/food")</code> method then calls <code>ParserUtil.parseView(argMultiMap.getValue(PREFIX_VIEW).get())</code> and gets a <code>View</code> object in return.</p>
+<p><code>ListExpenseCommandParse#parse("v/food")</code> method then calls <code>ParserUtil#parseView(argMultiMap#getValue(PREFIX_VIEW)#get())</code> and gets a <code>View</code> object in return.</p>
 </li>
 <li>
 <p>After that, a  <code>ListExpenseCommand</code> object is created with the <code>View</code> object as parameter and return to <code>LogicManager</code>.</p>
 </li>
 <li>
-<p><code>LogicManager</code> then calls <code>ListExpenseCommand.execute()</code>, which calls <code>Model.updateFilteredExpense(predicate)</code>, where predicate is obtained from calling the <code>ListExpenseCommand.getPredicate(view)</code>. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.</p>
+<p><code>LogicManager</code> then calls <code>ListExpenseCommand#execute()</code>, which calls <code>Model#updateFilteredExpense(predicate)</code>, where predicate is obtained from calling the <code>ListExpenseCommand#getPredicate(view)</code>. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.</p>
 </li>
 <li>
 <p>Finally, the expense list panel will show the new set of expenses. A <code>CommandResult</code> is then created and returned to <code>LogicManager</code>.</p>
@@ -858,7 +928,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">3.5.2. Design Consideration</a></h4>
+<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">5.4.2. Design Consideration</a></h4>
 <div class="paragraph">
 <p>This feature can be implemented in different ways in terms of how the specified expenses are filtered out. The alternative ways of implementation are shown below.</p>
 </div>
@@ -885,7 +955,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>Pros: More efficient. Will not go through every single expense.</p>
 </li>
 <li>
-<p>Cons: Will need to alter the original architecture.</p>
+<p>Cons: Will need to alter the original architecture. More storage space will be needed.</p>
 </li>
 </ul>
 </div>
@@ -895,49 +965,111 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="recurring-feature"><a class="link" href="#recurring-feature">3.6. Recurring Feature</a></h3>
+<h3 id="recurring-feature"><a class="link" href="#recurring-feature">5.5. Recurring Feature</a></h3>
 <div class="paragraph">
-<p>The Recurring feature consists of <code>addrecurring</code>, <code>listrecurring</code>, <code>editrecurring</code> and <code>deleterecurring</code>.</p>
+<p>The Recurring feature consists of <code>addrecurring</code>, <code>editrecurring</code>, <code>listrecurring</code>, <code>deleterecurring</code> <code>clearrecurring</code>, and <code>convertrecurring</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>This feature allows users to add recurring expenses: expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these 'recurring' are bills or subscription fees.</p>
+<p>Recurring expenses are expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees.<br></p>
 </div>
 <div class="paragraph">
-<p>Instead of manually adding the same expense repetitively, use <code>addrecurring</code> to add a Recurring. The Finance Tracker will automatically add the expense for you periodically at your specified frequency and for your specified duration!</p>
+<p>This feature allows users to add recurring expenses to the finance tracker and be able to constantly keep track of them. This is done by calling <code>Logic#execute</code> which creates an <code>AddRecurringCommand</code>. This command then calls <code>Model#addRecurring</code>, adding the specified recurring into the recurring list.<br></p>
 </div>
 <div class="paragraph">
-<p>This feature also simplifies the deletion and editing of these recurring expenses.</p>
-</div>
-<div class="sect3">
-<h4 id="future-implementation-of-automatic-expense-adding"><a class="link" href="#future-implementation-of-automatic-expense-adding">3.6.1. Future Implementation of Automatic expense adding</a></h4>
-<div class="paragraph">
-<p>For each recurring with occurrence "O" created, create an array of size O, A[O]. Inside each index is the date that an expense has to be added due to this recurring, i.e. A recurring created with Frequency = M and Occurrence = 2 on Date = 01-01-19 will create an array A of size 2, where A[0] = 01-02-19 and A[1] = 01-03-19.</p>
-</div>
-<div class="paragraph">
-<p>After an expense has been automatically created for each occurrence of the recurring, the specific index will be converted to null.</p>
-</div>
-<div class="paragraph">
-<p>Upon each launch of the MainApp, a check is done against the array of every recurring, comparing the current System date against non-null indexes. Any dates earlier or equals to the current System date will mean that an expense has to be automatically created for that recurring.</p>
-</div>
+<p>This feature also simplifies the deletion and editing of these recurring expenses, and they work in a similar manner.</p>
 </div>
 <div class="sect3">
-<h4 id="future-implementation-of-delete-edit-recurring-with-pastoption-y"><a class="link" href="#future-implementation-of-delete-edit-recurring-with-pastoption-y">3.6.2. Future Implementation of delete/edit recurring with pastOption = "Y"</a></h4>
+<h4 id="convert-recurring-to-expense-feature"><a class="link" href="#convert-recurring-to-expense-feature">5.5.1. Convert Recurring To Expense Feature</a></h4>
 <div class="paragraph">
-<p>Work in progress.</p>
+<p>The purpose of this feature is to provide the convenience for users by adding outstanding expenses from all their recurring expenses into the expense list. After adding recurring expenses into the Finance Tracker, the user can call <code>convertrecurring</code> to make the conversion.</p>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h5>
+<div class="paragraph">
+<p>Below is a step-by=step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command <code>convertrecurring</code>, to add outstanding expenses from all their recurring expenses into the expense list. This command is executed by <code>LogicManager</code>, which calls <code>FinanceTrackerParser#parseCommand("convertrecurring")</code>. This creates a <code>ConvertRecurringToExpenseCommand</code> object and returned to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> calls <code>ConvertRecurringToExpenseCommand#execute</code>, which will call Model#getFilteredRecurringList() to retrieve the list of recurrings in the financetracker.</p>
+</li>
+<li>
+<p>The programme then iterates through the recurring list, and for each recurring, checks the recurring&#8217;s <code>lastConvertedDate</code>, which is the last time the recurring has gone through a <code>convertrecurring</code> check.</p>
+</li>
+<li>
+<p>If the recurring&#8217;s <code>lastConvertedDate</code> is before the current date, this recurring will have to be checked again for outstanding expenses that can potentially be added.</p>
+</li>
+<li>
+<p>The programme then calls Recurring#getRecurringListofExpenses to retrieve the list of expenses that are supposed to be added by this recurring, and iterates through this expense list.</p>
+</li>
+<li>
+<p>If the expense&#8217;s date is before or equals to the current date, and after the <code>lastConvertedDate</code>, this recurring expense will have to be converted into an expense and added into the FinanceTracker. This is done by calling Model#addExpense(recurringListOfExpenses.get(j)).</p>
+</li>
+<li>
+<p>This is done for each expense of the recurring. After the iteration, the recurring&#8217;s <code>lastConvertedDate</code> is set to the current date.</p>
+</li>
+<li>
+<p>This is done for each recurring in the list.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="pay-debt-function"><a class="link" href="#pay-debt-function">3.7. Pay Debt Function</a></h3>
+<h3 id="delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4"><a class="link" href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">5.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></h3>
 <div class="paragraph">
-<p>This feature is currently not implemented. Will be implemented by v1.3.<br></p>
+<p>This is still a work in progress.<br></p>
 </div>
+<div class="paragraph">
+<p>The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="debt-feature"><a class="link" href="#debt-feature">5.7. Debt Feature</a></h3>
+<div class="paragraph">
+<p>The Debt feature consists of <code>adddebt</code>, <code>editdebt</code>, <code>listdebt</code>, <code>deletedebt</code>, <code>cleardebt</code> and <code>paydebt</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>This feature allows users to add debts to the finance tracker and be able to constantly keep track of them. This is done by calling <code>Logic#execute</code> which creates an <code>AddDebtCommand</code>. This command then calls <code>Model#addDebt</code>, adding the specified debt into the debt list.<br></p>
+</div>
+<div class="paragraph">
+<p>Editing, deleting and clearing of debts work in a similar manner.</p>
+</div>
+<div class="sect3">
+<h4 id="pay-debt-feature"><a class="link" href="#pay-debt-feature">5.7.1. Pay Debt Feature</a></h4>
 <div class="paragraph">
 <p>The purpose of this feature is to provide the convenience for users to indicate that they have paid off a particular debt and seamlessly convert that into an expense.<br></p>
 </div>
+<div class="sect4">
+<h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current Implementation</a></h5>
 <div class="paragraph">
-<p>How the software does it is to sieve out the following relevant information from the Debt entry:<br></p>
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>paydebt</code>.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PayDebtSequenceDiagram.png" alt="PayDebtSequenceDiagram" width="800">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command <code>paydebt 1</code>, to convert the first listed debt on the user interface into an expense. This command is executed by <code>LogicManager</code>, which calls <code>FinanceTrackerParser#parseCommand("paydebt 1")</code>. This creates a new <code>PayDebtCommandParser</code> object which will help parse the input by the user.</p>
+</li>
+<li>
+<p>The newly created object calls <code>parse("1")</code> which in turns calls <code>ArgumentTokenizer#tokenize("1", "d/")</code> to split the arguments into its preamble(the index) and the date(if inputted by the user). This returns an <code>argMultiMap</code> containing the split input.</p>
+</li>
+<li>
+<p>The <code>PayDebtCommandParser</code> object then calls <code>ParserUtil#parseIndex(argMultiMap.getPreamble())</code> and <code>ParserUtil#parseDate(argMultiMap.getValue("d/").get())</code> to parse the arguments into the index and date into its correct form respectively. If the user does not input a date, the program will use the local date on the system&#8217;s clock. A <code>PayDebtCommand</code> object containing the index and date is then created and returned to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> calls <code>PayDebtCommand#execute()</code>, which will call <code>Model#getFilteredDebtList()</code> to retrieve the list of debts stored in the finance tracker. The method <code>get(index)</code> is then called to retrieve the <code>debt</code> the user was intending to convert.</p>
+</li>
+<li>
+<p>An expense is then created by retrieving out the following relevant information from the <code>debt</code> entry:<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -954,9 +1086,9 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>The software then take this information and create a new Expense with the following fields:<br></p>
-</div>
+</li>
+<li>
+<p>The programme then take this information and creates a new Expense <code>convertedExpense</code> with the following fields:<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -969,16 +1101,67 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p><code>Category</code> : Same category will be used</p>
 </li>
 <li>
-<p><code>Date</code> : There is no need for the user to key in the date. The program will use the local date in the system&#8217;s clock</p>
+<p><code>Date</code> : Based on user&#8217;s input on when the debt is paid, else the program will use the local date in the system&#8217;s clock</p>
 </li>
 <li>
 <p><code>Remarks</code> : Same remarks will be used</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><code>Model#deleteDebt(debt)</code> and <code>Model#addExpense(convertedExpense)</code> are then called to delete the targeted <code>debt</code> from the debt list and add the <code>convertedExpense</code> into the expense list accordingly.</p>
+</li>
+<li>
+<p>The command result is then returned to the <code>LogicManager</code> which then returns it to the <code>UI</code> where the changes are then reflected on the user interface.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="debt-notifications-coming-in-v2-0"><a class="link" href="#debt-notifications-coming-in-v2-0">5.7.2. Debt Notifications (Coming in v2.0)</a></h4>
+<div class="paragraph">
+<p>This is still a work in progress.<br></p>
+</div>
+<div class="paragraph">
+<p>The purpose of this feature is to alert users when the deadline for their debts is approaching. These alerts come in the form of either a pop-up notification or an email alert.<br></p>
+</div>
+<div class="paragraph">
+<p>It is up to the user on when they would like to receive this notification. Currently, there are plans to implement the following options:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>1 month</code> before debt deadline</p>
+</li>
+<li>
+<p><code>1 week</code> before debt deadline</p>
+</li>
+<li>
+<p><code>3 days</code> before debt deadline</p>
+</li>
+<li>
+<p><code>1 day</code> before debt deadline</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="future-implementation"><a class="link" href="#future-implementation">Future Implementation</a></h5>
+<div class="paragraph">
+<p>Once the <code>duration</code> option is set, each time the main application loads, the programme will go through every debt in <code>Model#getFilteredDebtList()</code>, deduct <code>duration</code> from each <code>Debt#getDeadline()</code> to get its <code>notificationDate</code> and add them to a new list <code>notificationDates</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Each <code>notificationDate</code> is then checked against <code>LocalDate#now()</code>. If <code>notificationDate</code> is before or equals to <code>LocalDate#now</code>, they are then added to a new list <code>notificationsToBeAlerted</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Every item in <code>notificationsToBeAlerted</code> is then printed on an alert box, reminding the user of the upcoming deadlines for their debts.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.8. Statistics Feature</a></h3>
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">5.8. Statistics Feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.</p>
 </div>
@@ -989,11 +1172,11 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>This implementation is under Logic and Model components.</p>
 </div>
 <div class="sect3">
-<h4 id="code-stats-code"><a class="link" href="#code-stats-code">3.8.1. <code>stats</code></a></h4>
+<h4 id="code-stats-code"><a class="link" href="#code-stats-code">5.8.1. <code>stats</code></a></h4>
 <div class="sect4">
-<h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current implementation</a></h5>
+<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current implementation</a></h5>
 <div class="paragraph">
-<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>stats</code>. The other list commands have similar implementations.</p>
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>stats</code>.</p>
 </div>
 <div class="paragraph">
 <p>(UML here)</p>
@@ -1028,28 +1211,92 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-consideration-2"><a class="link" href="#design-consideration-2">Design Consideration</a></h5>
+<h5 id="design-consideration-3"><a class="link" href="#design-consideration-3">Design Consideration</a></h5>
 <div class="paragraph">
-<p>Work in Progress</p>
+<p>Work in Progress
+=== Budget feature</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="budget-feature"><a class="link" href="#budget-feature">3.9. Budget feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to set budgets for different categories so they can limit the amount spent for each category.</p>
 </div>
 <div class="paragraph">
-<p>How it is implemented:
-User enters the amount they want to limit themselves to for a particular category and specifies the start and end date for their budget.
-For every expense they enter that falls under that category, the totalSpent variable in the Budget class will be updated (coming in v1.3). This information will be displayed to the user so that they can know how much they have spent so far and better plan their future expenses so as not to exceed their budget.</p>
+<p>It stores all budgets added by the user and keeps track of the expenses added within the user-specified time frame.</p>
+</div>
+<div class="paragraph">
+<p>The implementation of the budget feature is under the Logic and Model components.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">5.8.2. Current implementation</a></h4>
+<div class="sect4">
+<h5 id="adding-a-budget"><a class="link" href="#adding-a-budget">Adding a budget:</a></h5>
+<div class="paragraph">
+<p>User enters the command word <code>addbudget</code>, followed by the category for which they want to set the budget for, the amount they want to limit themselves to for that category and specifies the start and end date for that budget.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="editing-an-existing-budget"><a class="link" href="#editing-an-existing-budget">Editing an existing budget:</a></h5>
+<div class="paragraph">
+<p>User enters the command word <code>editbudget</code>, followed by the category for which they want to edit the budget of and the relevant parameters of which they wish to edit the values of.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="deleting-an-existing-budget"><a class="link" href="#deleting-an-existing-budget">Deleting an existing budget:</a></h5>
+<div class="paragraph">
+<p>User enters the command word <code>deletebudget</code>, followed by the category for which they wish to delete the budget for.</p>
+</div>
+<div class="paragraph">
+<p>For all three actions, the user command gets parsed by the respective parsers: <code>AddBudgetCommandParser</code>, <code>EditBudgetCommandParser</code> and <code>DeleteBudgetCommandParser</code>, which handle the execution of the commands.</p>
+</div>
+<div class="paragraph">
+<p>Below is the UML sequence diagram of a scenario for the <code>addbudget</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddBudgetSequenceDiagram.png" alt="AddBudgetSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="updating-of-budgets"><a class="link" href="#updating-of-budgets">Updating of budgets:</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>When a new budget is added, the model checks the expense list for any expenses of that category which fall within the time frame of the added budget
+and sets the <code>totalSpent</code> and <code>percentage</code> variables of the Budget object accordingly.</p>
+</li>
+<li>
+<p>When an existing budget is edited, the model updates the <code>percentage</code> variable of the Budget object.</p>
+</li>
+<li>
+<p>For every expense the user enters, the model will check if there exists a budget for the category of the added expense
+and if the date of the expense is within the time frame of the budget.
+If the added expense is during the time of the budget, the totalSpent variable in the Budget object with that specific category will be updated.</p>
+</li>
+<li>
+<p>The total amount spent for each budget category, along with the percentage of the total budgeted amount, will be displayed to the user so that the user can know how much has been spent so far and can better plan their future expenses so as not to exceed their budget.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-enhancements"><a class="link" href="#future-enhancements">5.8.3. Future Enhancements</a></h4>
+<div class="paragraph">
+<p>The Budget class has a boolean method <code>overlaps(Budget other)</code> which returns true if two budgets of the same category have overlapping time frames.
+This method was included with the idea of allowing the user to add multiple budgets for the same category but for different time frames.</p>
+</div>
+<div class="paragraph">
+<p>Another possible enhancement would be to allow the user to set a recurring budget.
+For example, if a user wants to limit their daily spending to $20, maybe an <code>addrecurringbudget c/food $/20 f/d</code> command, similar to the recurring expense command, could be implemented so that the user does not have to add a budget everyday.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
+<h2 id="documentation"><a class="link" href="#documentation">6. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We use asciidoc for writing documentation.</p>
@@ -1067,20 +1314,20 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 </table>
 </div>
 <div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">6.1. Editing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">6.2. Publishing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">6.3. Converting Documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -1111,7 +1358,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 </div>
 </div>
 <div class="sect2">
-<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></h3>
+<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">6.4. Site-wide Documentation Settings</a></h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/build.gradle"><code>build.gradle</code></a> file specifies some project-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how all documentation files within this project are rendered.</p>
 </div>
@@ -1170,7 +1417,7 @@ This will render the SE-EDU navigation bar at the top of the page, and add some 
 </table>
 </div>
 <div class="sect2">
-<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></h3>
+<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">6.5. Per-file Documentation Settings</a></h3>
 <div class="paragraph">
 <p>Each <code>.adoc</code> file may also specify some file-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how the file is rendered.</p>
 </div>
@@ -1227,7 +1474,7 @@ One of: <code>UserGuide</code>, <code>DeveloperGuide</code>, <code>LearningOutco
 </table>
 </div>
 <div class="sect2">
-<h3 id="site-template"><a class="link" href="#site-template">4.6. Site Template</a></h3>
+<h3 id="site-template"><a class="link" href="#site-template">6.6. Site Template</a></h3>
 <div class="paragraph">
 <p>The files in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/docs/stylesheets"><code>docs/stylesheets</code></a> are the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS stylesheets</a> of the site.
 You can modify them to change some properties of the site&#8217;s design.</p>
@@ -1256,10 +1503,10 @@ The SE-EDU team does not provide support for modified template files.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Testing"><a class="link" href="#Testing">5. Testing</a></h2>
+<h2 id="Testing"><a class="link" href="#Testing">7. Testing</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
+<h3 id="running-tests"><a class="link" href="#running-tests">7.1. Running Tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -1321,7 +1568,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 </div>
 </div>
 <div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">5.2. Types of tests</a></h3>
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">7.2. Types of tests</a></h3>
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
@@ -1363,7 +1610,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">7.3. Troubleshooting Testing</a></h3>
 <div class="paragraph">
 <p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
@@ -1381,34 +1628,34 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
+<h2 id="dev-ops"><a class="link" href="#dev-ops">8. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
+<h3 id="build-automation"><a class="link" href="#build-automation">8.1. Build Automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">8.2. Continuous Integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">6.3. Coverage Reporting</a></h3>
+<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">8.3. Coverage Reporting</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://coveralls.io/">Coveralls</a> to track the code coverage of our projects. See <a href="UsingCoveralls.html">UsingCoveralls.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="documentation-previews"><a class="link" href="#documentation-previews">6.4. Documentation Previews</a></h3>
+<h3 id="documentation-previews"><a class="link" href="#documentation-previews">8.4. Documentation Previews</a></h3>
 <div class="paragraph">
 <p>When a pull request has changes to asciidoc files, you can use <a href="https://www.netlify.com/">Netlify</a> to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <a href="UsingNetlify.html">UsingNetlify.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">6.5. Making a Release</a></h3>
+<h3 id="making-a-release"><a class="link" href="#making-a-release">8.5. Making a Release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -1430,7 +1677,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing Dependencies</a></h3>
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">8.6. Managing Dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Finance Tracker depends on the <a href="https://github.com/FasterXML/jackson">Jackson library</a> for JSON parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:</p>
 </div>
@@ -1456,638 +1703,12 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <a href="#GetStartedProgramming-EachComponent">Section A.1, &#8220;Improving each component&#8221;</a>.</p>
+<p>First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time.</p>
 </li>
 <li>
-<p>Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <a href="#GetStartedProgramming-RemarkCommand">Section A.2, &#8220;Creating a new command: <code>remark</code>&#8221;</a> explains how to go about adding such a feature.</p>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="GetStartedProgramming-EachComponent"><a class="link" href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></h3>
-<div class="paragraph">
-<p>Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).</p>
-</div>
-<h4 id="code-logic-code-component" class="discrete"><code>Logic</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>logic</code>. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8221;</a> before attempting to modify the <code>Logic</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a shorthand equivalent alias for each of the individual commands. For example, besides typing <code>clear</code>, the user can also type <code>c</code> to remove all expenses in the list.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/commands/generalcommands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/commands/expensecommands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
-</li>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/parser/FinanceTrackerParser.java"><code>FinanceTrackerParser</code></a> is responsible for analyzing command words.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify the switch statement in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/parser/FinanceTrackerParser.java"><code>FinanceTrackerParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
-</li>
-<li>
-<p>Add new tests for each of the aliases that you have added.</p>
-</li>
-<li>
-<p>Update the user guide to document the new aliases.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/785">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
+<p>Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components.</p>
 </li>
 </ol>
-</div>
-<h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8221;</a> before attempting to modify the <code>Model</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from every expense in the finance tracker.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/FinanceTracker.java"><code>FinanceTracker</code></a> API need to be updated.</p>
-</li>
-<li>
-<p>Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?</p>
-</li>
-<li>
-<p>Find out which of the existing API methods in  <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/FinanceTracker.java"><code>FinanceTracker</code></a> and <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/expense/Expense.java"><code>Expense</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/FinanceTracker.java"><code>FinanceTracker</code></a> allows you to update a expense, and <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/expense/Expense.java"><code>Expense</code></a> allows you to update the tags.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/FinanceTracker.java"><code>FinanceTracker</code></a>. Loop through each expense, and remove the <code>tag</code> from each expense.</p>
-</li>
-<li>
-<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a> should call <code>FinanceTracker#removeTag(Tag)</code>.</p>
-</li>
-<li>
-<p>Add new tests for each of the new public methods that you have added.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/790">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-ui-code-component" class="discrete"><code>Ui</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your finance tracker application. You realize that one of the users occasionally tries to delete non-existent tags from an expense, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last expense in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
-</div>
-<div class="paragraph">
-<p>[TIP]Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</a> before attempting to modify the <code>UI</code> component.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> such that <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay</code></a> can show a different style on error (currently it shows the same regardless of errors).</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-result-before.png" alt="getting started ui result before" width="200">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-result-after.png" alt="getting started ui result after" width="200">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> is raised by <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/CommandBox.java"><code>CommandBox</code></a> which also knows whether the result is a success or failure, and is caught by <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay</code></a> which is where we want to change the style to.</p>
-</li>
-<li>
-<p>Refer to <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/CommandBox.java"><code>CommandBox</code></a> for an example on how to display an error.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> 's constructor so that users of the event can indicate whether an error has occurred.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)</code></a> to react to this event appropriately.</p>
-</li>
-<li>
-<p>You can write two different kinds of tests to ensure that the functionality works:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The unit tests for <code>ResultDisplay</code> can be modified to include verification of the color.</p>
-</li>
-<li>
-<p>The system tests <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/systemtests/FinanceTrackerSystemTest.java"><code>FinanceTrackerSystemTest#assertCommandBoxShowsDefaultStyle() and FinanceTrackerTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/799">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Do read the commits one at a time if you feel overwhelmed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modify the <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of expense in the finance tracker.</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-status-before.png" alt="getting started ui status before" width="500">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-status-after.png" alt="getting started ui status after" width="500">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
-</li>
-<li>
-<p><a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the finance tracker is updated.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify the constructor of <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of expenses when the application just started.</p>
-</li>
-<li>
-<p>Use <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter#handleFinanceTrackerChangedEvent(FinanceTrackerChangedEvent)</code></a> to update the number of expenses whenever there are new changes to the finance tracker.</p>
-</li>
-<li>
-<p>For tests, modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of expense status, just like what we did for save location and sync status.</p>
-</li>
-<li>
-<p>For system tests, modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/systemtests/FinanceTrackerSystemTest.java"><code>FinanceTrackerSystemTest</code></a> to also verify the new total number of expenses status bar.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-storage-code-component" class="discrete"><code>Storage</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the finance tracker to the cloud. However, the current implementation of the application constantly saves the finance tracker after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the finance tracker storage.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage component&#8221;</a> before attempting to modify the <code>Storage</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new method <code>backupFinanceTracker(ReadOnlyFinanceTracker)</code>, so that the finance tracker can be saved in a fixed temporary location.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hint</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Add the API method in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/storage/FinanceTrackerStorage.java"><code>FinanceTrackerStorage</code></a> interface.</p>
-</li>
-<li>
-<p>Implement the logic in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/storage/JsonFinanceTrackerStorage.java"><code>JsonFinanceTrackerStorage</code></a> class.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/594">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="GetStartedProgramming-RemarkCommand"><a class="link" href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></h3>
-<div class="paragraph">
-<p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
-</div>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>financetracker</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular expense, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
-</div>
-<div class="sect3">
-<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
-<div class="paragraph">
-<p>Edits the remark for a expense specified in the <code>INDEX</code>.<br>
-Format: <code>remark INDEX r/[REMARK]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>remark 1 r/Likes to drink coffee.</code><br>
-Edits the remark for the first expense to <code>Likes to drink coffee.</code></p>
-</li>
-<li>
-<p><code>remark 1 r/</code><br>
-Removes the remark for the first expense.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
-<div class="sect4">
-<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
-<div class="paragraph">
-<p>Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/commands/Command.java"><code>Command</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/parser/FinanceTrackerParser.java"><code>FinanceTrackerParser</code></a> to accept a <code>RemarkCommand</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>RemarkCommandTest</code> that tests that <code>execute()</code> throws an Exception.</p>
-</li>
-<li>
-<p>Add new test method to <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/seedu/address/logic/parser/FinanceTrackerParserTest.java"><code>FinanceTrackerParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-2-logic-teach-the-app-to-accept-remark-arguments"><a class="link" href="#step-2-logic-teach-the-app-to-accept-remark-arguments">[Step 2] Logic: Teach the app to accept 'remark' arguments</a></h5>
-<div class="paragraph">
-<p>Let&#8217;s teach the application to parse arguments that our <code>remark</code> command will accept. E.g. <code>1 r/Likes to drink coffee.</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <code>RemarkCommand</code> to take in an <code>Index</code> and <code>String</code> and print those two parameters as the error message.</p>
-</li>
-<li>
-<p>Add <code>RemarkCommandParser</code> that knows how to parse two arguments, one index and one with prefix 'r/'.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/logic/parser/FinanceTrackerParser.java"><code>FinanceTrackerParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <code>RemarkCommandTest</code> to test the <code>RemarkCommand#equals()</code> method.</p>
-</li>
-<li>
-<p>Add <code>RemarkCommandParserTest</code> that tests different boundary values
-for <code>RemarkCommandParser</code>.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/seedu/address/logic/parser/FinanceTrackerParserTest.java"><code>FinanceTrackerParserTest</code></a> to test that the correct command is generated according to the user input.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-expensecard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-expensecard-code">[Step 3] Ui: Add a placeholder for remark in <code>ExpenseCard</code></a></h5>
-<div class="paragraph">
-<p>Let&#8217;s add a placeholder on all our <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ExpenseCard.java"><code>ExpenseCard</code></a> s to display a remark for each expense later.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>Label</code> with any random text inside <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/resources/view/ExpenseListCard.fxml"><code>ExpenseListCard.fxml</code></a>.</p>
-</li>
-<li>
-<p>Add FXML annotation in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ExpenseCard.java"><code>ExpenseCard</code></a> to tie the variable to the actual label.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/guitests/guihandles/ExpenseCardHandle.java"><code>ExpenseCardHandle</code></a> so that future tests can read the contents of the remark label.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">[Step 4] Model: Add <code>Remark</code> class</a></h5>
-<div class="paragraph">
-<p>We have to properly encapsulate the remark in our <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/expense/Expense.java"><code>Expense</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>Remark</code> to model component (you can copy from <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/attributes/Address.java"><code>Address</code></a>, remove the regex and change the names accordingly).</p>
-</li>
-<li>
-<p>Modify <code>RemarkCommand</code> to now take in a <code>Remark</code> instead of a <code>String</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add test for <code>Remark</code>, to test the <code>Remark#equals()</code> method.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-5-model-modify-code-expense-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-expense-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>Expense</code> to support a <code>Remark</code> field</a></h5>
-<div class="paragraph">
-<p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/expense/Expense.java"><code>Expense</code></a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>getRemark()</code> in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/expense/Expense.java"><code>Expense</code></a>.</p>
-</li>
-<li>
-<p>You may assume that the user will not be able to use the <code>add</code> and <code>edit</code> commands to modify the remarks field (i.e. the expense will be created without a remark).</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>data/addressbook.json</code> so that the application will load the sample data when you launch it.)</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-6-storage-add-code-remark-code-field-to-code-jsonadaptedexpense-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-jsonadaptedexpense-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>JsonAdaptedExpense</code> class</a></h5>
-<div class="paragraph">
-<p>We now have <code>Remark</code> s for <code>Expense</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/storage/JsonAdaptedExpense.java"><code>JsonAdaptedExpense</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new JSON field for <code>Remark</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Fix <code>invalidAndValidExpenseAddressBook.json</code>, <code>typicalExpensesFinanceTracker.json</code>, <code>validAddressBook.json</code> etc., such that the JSON tests will not fail due to a missing <code>remark</code> field.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-6b-test-add-withremark-for-code-expensebuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-expensebuilder-code">[Step 6b] Test: Add withRemark() for <code>ExpenseBuilder</code></a></h5>
-<div class="paragraph">
-<p>Since <code>Expense</code> can now have a <code>Remark</code>, we should add a helper method to <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/seedu/address/testutil/ExpenseBuilder.java"><code>ExpenseBuilder</code></a>, so that users are able to create remarks when building a <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/model/expense/Expense.java"><code>Expense</code></a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new method <code>withRemark()</code> for <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/seedu/address/testutil/ExpenseBuilder.java"><code>ExpenseBuilder</code></a>. This method will create a new <code>Remark</code> for the expense that it is currently building.</p>
-</li>
-<li>
-<p>Try and use the method on any sample <code>Expense</code> in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/seedu/address/testutil/TypicalExpenses.java"><code>TypicalExpenses</code></a>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-7-ui-connect-code-remark-code-field-to-code-expensecard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-expensecard-code">[Step 7] Ui: Connect <code>Remark</code> field to <code>ExpenseCard</code></a></h5>
-<div class="paragraph">
-<p>Our remark label in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ExpenseCard.java"><code>ExpenseCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/ExpenseCard.java"><code>ExpenseCard</code></a>'s constructor to bind the <code>Remark</code> field to the <code>Expense</code> 's remark.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysExpense(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-8-logic-implement-code-remarkcommand-execute-code-logic"><a class="link" href="#step-8-logic-implement-code-remarkcommand-execute-code-logic">[Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic</a></h5>
-<div class="paragraph">
-<p>We now have everything set up&#8230;&#8203; but we still can&#8217;t modify the remarks. Let&#8217;s finish it up by adding in actual logic for our <code>remark</code> command.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Replace the logic in <code>RemarkCommand#execute()</code> (that currently just throws an <code>Exception</code>), with the actual logic to modify the remarks of an expense.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Update <code>RemarkCommandTest</code> to test that the <code>execute()</code> logic works.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
-<div class="paragraph">
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -2100,7 +1721,10 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>has a need to manage a significant number of expenses</p>
+<p>has a need to manage a significant number of expenses, debts and bills/subscriptions</p>
+</li>
+<li>
+<p>wants to keep track of how much is being spent</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
@@ -3912,7 +3536,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with an empty finance tracker. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -3933,9 +3557,6 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="deleting-an-expense"><a class="link" href="#deleting-an-expense">H.2. Deleting an expense</a></h3>
@@ -3949,15 +3570,15 @@ Expected: The most recent window size and location is retained.</p>
 <p>Prerequisites: List all expenses using the <code>listexpense v/all</code> command. Multiple expenses in the list.</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
+<p>Test case: <code>deleteexpense 1</code><br>
 Expected: First expense is deleted from the list. Details of the deleted expense shown in the status message. Timestamp in the status bar is updated.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
+<p>Test case: <code>deleteexpense 0</code><br>
 Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>deleteexpense</code>, <code>deleteexpense x</code> (where x is an integer larger than the list size), <code>deleteexpense n/bkt</code><br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -3965,29 +3586,108 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<h3 id="adding-a-budget-2"><a class="link" href="#adding-a-budget-2">H.3. Adding a budget</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Dealing with missing/corrupted data files</p>
+<p>Adding a budget for a specific category</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Prerequisite: Add a budget for food category using the <code>addbudget c/food $/100 ed/31-12-2020</code> command
+(if you are doing this in year 2021 or later, make sure the ed/ date is later than today&#8217;s date). Now a food budget exists in budget list.</p>
+</li>
+<li>
+<p>Test case: adding a budget for a category which already has a budget<br>
+Command: <code>addbudget c/food $/200 ed/31-12-2020</code><br>
+Expected: No budget is created. Error message that budget already exists for that category shown in status message.</p>
+</li>
+<li>
+<p>Test case: adding a budget for a new category without specifying the amount allocated for that budget<br>
+Command: <code>addbudget c/travel ed/31-12-2020</code>
+Expected: No budget is created. Error message that command format is invalid  shown in status message.</p>
+</li>
+<li>
+<p>Test case: adding a budget with start date before today&#8217;s date<br>
+Command: <code>addbudget c/work $/100 sd/01-01-2019 ed/31-12-2019</code><br>
+Expected: No budget is created. Error message for invalid start date is shown in status message.</p>
+</li>
+<li>
+<p>Test case: adding a budget with end date before start date<br>
+Command: <code>addbudget c/food $/250 sd/01-01-2020 ed/30-06-2019</code><br>
+Expected: No budget is created. Error message for invalid end date is shown in status message.</p>
 </li>
 </ol>
 </div>
+</li>
+<li>
+<p>Saving added budgets</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+<p>After adding a budget, close the window then re-launch the app.<br>
+Expected: the budget list panel shows the budget(s) you had previously added before closing the window.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-debt"><a class="link" href="#editing-a-debt">H.4. Editing a debt</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Editing a debt while all debts are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all debts using the <code>listdebt v/all</code> command. Multiple debts in the list.</p>
+</li>
+<li>
+<p>Test case: <code>editdebt 2 $/17</code><br>
+Expected: Amount for second debt in the list is changed to $17. Success message shown in status message.</p>
+</li>
+<li>
+<p>Test case: <code>editdebt 1</code><br>
+Expected: First debt is not edited. Message prompting user for at least one field to be edited shown in status message.</p>
+</li>
+<li>
+<p>Also try <code>editdebt 0 due/31-12-2020</code><br>
+Expected: No debt edited. Error message for invalid command format shown in status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-recurring-expense"><a class="link" href="#adding-a-recurring-expense">H.5. Adding a recurring expense</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a recurring expense to an empty list</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>addrecurring n/daily thing $/2 c/entertainment f/d o/14</code>
+Expected: Recurring expense with specified name <code>daily thing</code>, amount <code>$2</code>, category <code>ENTERTAINMENT</code>, frequency <code>daily</code> and occurrence <code>14 times</code>
+added to recurring list with starting date set as today&#8217;s date.
+Success message shown in status message.</p>
+</li>
+<li>
+<p>Test case: <code>addrecurring n/daily sustenance $/10 c/food</code> or <code>addrecurring n/annual trip $/1500 f/y o/10</code><br>
+Expected: No recurring expense created. Error message for invalid command format shown in status message.</p>
+</li>
+<li>
+<p>Test case: <code>addrecurring n/monthly donation $/100 c/others f/m o/12 d/01-01-2019</code><br>
+Expected: No recurring expense created. Error message for invalid date shown in status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-26 15:56:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:52:46 UTC</div></div></div></body></html>

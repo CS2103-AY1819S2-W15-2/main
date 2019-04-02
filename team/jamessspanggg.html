@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>John Doe - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>James Pang Mun Wai - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Doe - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">PROJECT: AddressBook - Level 4</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>James Pang Mun Wai - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-personal-finance-tracker"><a class="link" href="#project-personal-finance-tracker">PROJECT: Personal Finance Tracker</a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -10,7 +10,10 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>This portfolio aims to document the contributions made by James Pang Mun Wai to the Personal Finance Tracker.</p>
+</div>
+<div class="paragraph">
+<p>Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an <a href="https://github.com/nus-cs2103-AY1819S2/addressbook-level4">Address Book</a> over a period of 8 weeks under the constraints described <a href="https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html">here</a>.</p>
 </div>
 </div>
 </div>
@@ -20,29 +23,26 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: added <strong>the listing feature to list expenses, debts and recurring expenses</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows the user to efficiently list expenses, debts and recurring expenses based on the view specified. Only items that match the view will be listed. For example, listing expense with view as the category food will lead to only expenses with the category food to be listed.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because a user can conveniently look at groups of items based on the view specified rather than spending time to scroll through all the expenses/debts/recurring expenses.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: This enhancement was built to be more flexible according to the user&#8217;s needs. Rather than the list command from AB4 that lists all items, the updated list commands allow more specific listings. The listing features was implemented for 3 lists, namely ExpenseList, DebtList and RecurringList.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: added and handled <strong>all UI components</strong> in Personal Finance Tracker.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jamessspanggg&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-03-26&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Code collated by reposense</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -53,7 +53,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Facilitated meetings every Friday evening</p>
+</li>
+<li>
+<p>Set deadlines for tasks</p>
+</li>
+<li>
+<p>Check all pull requests done by group mates</p>
 </li>
 </ul>
 </div>
@@ -63,10 +69,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Updated the GUI to have Debt, Budget and Recurring Lists (Pull requests <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/111">#111</a>, <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/115">#115</a>)</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Updated the GUI to display selected individual list items in Browser Panel (Pull request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/174">#174</a>)</p>
+</li>
+<li>
+<p>Updated the storage to allow read and write of Debt, Budget and Recurring data (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/199">#199</a>)</p>
+</li>
+<li>
+<p>Wrote additional tests for existing features to increase coverage from 74.04% to 80.56% (Pull request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/194">#194</a>)</p>
 </li>
 </ul>
 </div>
@@ -76,7 +88,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Did cosmetic tweaks to existing contents of the User Guide (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/22">#22</a>)</p>
+</li>
+<li>
+<p>Added the implementation of listing in Developer&#8217;s Guide (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/176">#176</a>)</p>
 </li>
 </ul>
 </div>
@@ -86,16 +101,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/81">#81</a>, <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/119">#119</a>, <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/175">#175</a>, <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/135">#135</a></p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
+<p>Contributed to forum discussions (examples:  <a href="https://github.com/nus-cs2103-AY1819S2/forum/issues/5">5</a>, <a href="https://github.com/nus-cs2103-AY1819S2/forum/issues/17">17</a>, <a href="https://github.com/nus-cs2103-AY1819S2/forum/issues/21">21</a>, <a href="https://github.com/nus-cs2103-AY1819S2/forum/issues/67">67</a>)</p>
 </li>
 <li>
 <p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
 </li>
 <li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
+<p>The displaying of html files in browser panel that I added was adopted by a group from last semester&#8217;s CS2103 (<a href="https://github.com/CS2103-AY1819S1-W16-1/main/blob/master/src/main/java/seedu/address/ui/BrowserPanel.java">1</a>)</p>
 </li>
 </ul>
 </div>
@@ -105,10 +120,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
+<p>Set up the team repository</p>
 </li>
 <li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Set up Travis CI integration</p>
 </li>
 </ul>
 </div>
@@ -117,9 +132,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -137,80 +149,44 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<h3 id="listing-expenses-code-listexpense-code"><a class="link" href="#listing-expenses-code-listexpense-code">Listing expenses : <code>listexpense</code></a></h3>
 <div class="paragraph">
-<p>Restores the finance tracker to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+<p>Shows a list of expenses in the finance tracker according to the view specified.<br>
+Format: <code>listexpense v/VIEW</code><br>
+Shortcut: <code>le v/VIEW</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the finance tracker&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>), modify budget (<code>addbudget</code>, <code>deletedudget</code> and <code>editbudget</code>), modify debt (<code>adddebt</code>, <code>deletedebt</code>, <code>editdebt</code> and <code>paydebt</code>) and modify recurring (<code>addrecurring</code>, <code>deleterecurring</code> and <code>editrecurring</code>).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>deleteexpense 1</code><br>
-<code>listexpense v/all</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p>The VIEW specifies how the list of expenses are displayed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>v/all: displays entire list of expenses</p>
 </li>
 <li>
-<p><code>select 1</code><br>
-<code>listexpense v/all</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+<p>v/day: displays list of expenses added since a day ago</p>
 </li>
 <li>
-<p><code>deleteexpense 1</code><br>
-<code>clearexpense</code><br>
-<code>undo</code> (reverses the <code>clearexpense</code> command)<br>
-<code>undo</code> (reverses the <code>deleteexpense 1</code> command)<br></p>
+<p>v/month: displays list of expenses added since a month ago</p>
+</li>
+<li>
+<p>v/year: displays list of expenses added since a year ago</p>
+</li>
+<li>
+<p>v/CATEGORY: displays list of expenses with CATEGORY such as “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive</p>
+</li>
+<li>
+<p>v/$10, v/$100, v/$1000: display list of expenses with amount greater than $10, $100 or $1000</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteexpense 1</code><br>
-<code>undo</code> (reverses the <code>deleteexpense 1</code> command)<br>
-<code>redo</code> (reapplies the <code>deleteexpense 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>deleteexpense 1</code><br>
-<code>clearexpense</code><br>
-<code>undo</code> (reverses the <code>clearexpense</code> command)<br>
-<code>undo</code> (reverses the <code>deleteexpense 1</code> command)<br>
-<code>redo</code> (reapplies the <code>deleteexpense 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clearexpense</code> command)<br></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -229,9 +205,90 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="listing-feature"><a class="link" href="#listing-feature">Listing Feature</a></h3>
+<div class="paragraph">
+<p>This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.</p>
+</div>
+<div class="paragraph">
+<p>Listing feature consists of <code>listexpense</code>, <code>listrecurring</code> and <code>listdebt</code>.</p>
+</div>
+<div class="paragraph">
+<p>This implementation is under Logic and Model components.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
+<div class="paragraph">
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>listexpense</code>. The other list commands have similar implementations.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListExpenseSequenceDiagram.png" alt="ListExpenseSequenceDiagram" width="800">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters command <code>listexpense v/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>ListExpenseCommandParser</code> object. The created object then calls <code>ListExpenseCommandParser#parse("v/food")</code> method.</p>
+</li>
+<li>
+<p><code>ListExpenseCommandParser#parse("v/food")</code> method calls the <code>ArgumentTokenizer#tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
+</li>
+<li>
+<p><code>ListExpenseCommandParse#parse("v/food")</code> method then calls <code>ParserUtil#parseView(argMultiMap#getValue(PREFIX_VIEW)#get())</code> and gets a <code>View</code> object in return.</p>
+</li>
+<li>
+<p>After that, a  <code>ListExpenseCommand</code> object is created with the <code>View</code> object as parameter and return to <code>LogicManager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then calls <code>ListExpenseCommand#execute()</code>, which calls <code>Model#updateFilteredExpense(predicate)</code>, where predicate is obtained from calling the <code>ListExpenseCommand#getPredicate(view)</code>. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.</p>
+</li>
+<li>
+<p>Finally, the expense list panel will show the new set of expenses. A <code>CommandResult</code> is then created and returned to <code>LogicManager</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">Design Consideration</a></h4>
+<div class="paragraph">
+<p>This feature can be implemented in different ways in terms of how the specified expenses are filtered out. The alternative ways of implementation are shown below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1 (current choice): Go through all expenses in the <code>FinanceTracker</code> and filter out those that are under the specified view.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement. The original architecture is preserved.</p>
+</li>
+<li>
+<p>Cons: Time-consuming. Large number of expenses in FinanceTracker will take longer time to filter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Store expenses in separate files based on different views. Only check files under the specified view when filtering.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More efficient. Will not go through every single expense.</p>
+</li>
+<li>
+<p>Cons: Will need to alter the original architecture. More storage space will be needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedFinanceTracker</code>.
 It extends <code>FinanceTracker</code> with an undo/redo history, stored internally as a <code>financeTrackerStateList</code> and <code>currentStatePointer</code>.
@@ -429,15 +486,6 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
-<div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
 </div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:52:46 UTC</div></div></div></body></html>
