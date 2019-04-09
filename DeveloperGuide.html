@@ -1,77 +1,69 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><meta name="author" content="=== Listing Feature"><title>Personal Finance Tracker - Developer Guide</title><link rel="stylesheet" href="./gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Personal Finance Tracker - Developer Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Personal Finance Tracker - Developer Guide</h1><div class="details"><span class="author" id="author">=== Listing Feature</span><br></div></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Personal Finance Tracker</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w15-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Personal Finance Tracker - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.</p>
-</div>
-<div class="paragraph">
-<p>Listing feature consists of <code>listexpense</code>, <code>listrecurring</code> and <code>listdebt</code>.</p>
-</div>
-<div class="paragraph">
-<p>This implementation is under Logic and Model components.</p>
+<p>By: <code>CS2103-AY1819S2-W15-2</code>      Since: <code>Feb 2019</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle"></div>
-<ul class="sectlevel3">
-<li><a href="#current-implementation">1. Current implementation</a></li>
-<li><a href="#design-consideration">2. Design Consideration</a></li>
-<li><a href="#setting-up">3. Setting up</a>
+<ul class="sectlevel1">
+<li><a href="#setting-up">1. Setting up</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">3.1. Prerequisites</a></li>
-<li><a href="#setting-up-the-project-in-your-computer">3.2. Setting up the project in your computer</a></li>
-<li><a href="#verifying-the-setup">3.3. Verifying the setup</a></li>
-<li><a href="#configurations-to-do-before-writing-code">3.4. Configurations to do before writing code</a></li>
+<li><a href="#prerequisites">1.1. Prerequisites</a></li>
+<li><a href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></li>
+<li><a href="#verifying-the-setup">1.3. Verifying the setup</a></li>
+<li><a href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></li>
 </ul>
 </li>
-<li><a href="#design">4. Design</a>
+<li><a href="#design">2. Design</a>
 <ul class="sectlevel2">
-<li><a href="#Design-Architecture">4.1. Architecture</a></li>
-<li><a href="#Design-Ui">4.2. UI component</a></li>
-<li><a href="#Design-Logic">4.3. Logic component</a></li>
-<li><a href="#Design-Model">4.4. Model component</a></li>
-<li><a href="#Design-Storage">4.5. Storage component</a></li>
-<li><a href="#Design-Commons">4.6. Common classes</a></li>
+<li><a href="#Design-Architecture">2.1. Architecture</a></li>
+<li><a href="#Design-Ui">2.2. UI component</a></li>
+<li><a href="#Design-Logic">2.3. Logic component</a></li>
+<li><a href="#Design-Model">2.4. Model component</a></li>
+<li><a href="#Design-Storage">2.5. Storage component</a></li>
+<li><a href="#Design-Commons">2.6. Common classes</a></li>
 </ul>
 </li>
-<li><a href="#implementation">5. Implementation</a>
+<li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">5.1. Undo/Redo feature</a></li>
-<li><a href="#logging">5.2. Logging</a></li>
-<li><a href="#Implementation-Configuration">5.3. Configuration</a></li>
-<li><a href="#listing-feature">5.4. Listing Feature</a></li>
-<li><a href="#recurring-feature">5.5. Recurring Feature</a></li>
-<li><a href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">5.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></li>
-<li><a href="#debt-feature">5.7. Debt Feature</a></li>
-<li><a href="#statistics-feature">5.8. Statistics Feature</a></li>
+<li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
+<li><a href="#logging">3.2. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.3. Configuration</a></li>
+<li><a href="#listing-feature">3.4. Listing Feature</a></li>
+<li><a href="#recurring-feature">3.5. Recurring Feature</a></li>
+<li><a href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">3.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></li>
+<li><a href="#debt-feature">3.7. Debt Feature</a></li>
+<li><a href="#statistics-feature">3.8. Statistics Feature</a></li>
 </ul>
 </li>
-<li><a href="#documentation">6. Documentation</a>
+<li><a href="#documentation">4. Documentation</a>
 <ul class="sectlevel2">
-<li><a href="#editing-documentation">6.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">6.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">6.3. Converting Documentation to PDF format</a></li>
-<li><a href="#Docs-SiteWideDocSettings">6.4. Site-wide Documentation Settings</a></li>
-<li><a href="#Docs-PerFileDocSettings">6.5. Per-file Documentation Settings</a></li>
-<li><a href="#site-template">6.6. Site Template</a></li>
+<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
+<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
+<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
+<li><a href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></li>
+<li><a href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></li>
+<li><a href="#site-template">4.6. Site Template</a></li>
 </ul>
 </li>
-<li><a href="#Testing">7. Testing</a>
+<li><a href="#Testing">5. Testing</a>
 <ul class="sectlevel2">
-<li><a href="#running-tests">7.1. Running Tests</a></li>
-<li><a href="#types-of-tests">7.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">7.3. Troubleshooting Testing</a></li>
+<li><a href="#running-tests">5.1. Running Tests</a></li>
+<li><a href="#types-of-tests">5.2. Types of tests</a></li>
+<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
 </ul>
 </li>
-<li><a href="#dev-ops">8. Dev Ops</a>
+<li><a href="#dev-ops">6. Dev Ops</a>
 <ul class="sectlevel2">
-<li><a href="#build-automation">8.1. Build Automation</a></li>
-<li><a href="#continuous-integration">8.2. Continuous Integration</a></li>
-<li><a href="#coverage-reporting">8.3. Coverage Reporting</a></li>
-<li><a href="#documentation-previews">8.4. Documentation Previews</a></li>
-<li><a href="#making-a-release">8.5. Making a Release</a></li>
-<li><a href="#managing-dependencies">8.6. Managing Dependencies</a></li>
+<li><a href="#build-automation">6.1. Build Automation</a></li>
+<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
+<li><a href="#coverage-reporting">6.3. Coverage Reporting</a></li>
+<li><a href="#documentation-previews">6.4. Documentation Previews</a></li>
+<li><a href="#making-a-release">6.5. Making a Release</a></li>
+<li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
 </ul>
 </li>
 <li><a href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a></li>
@@ -97,83 +89,11 @@
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">1. Current implementation</a></h4>
-<div class="paragraph">
-<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>listexpense</code>. The other list commands have similar implementations.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/ListExpenseSequenceDiagram.png" alt="ListExpenseSequenceDiagram" width="800">
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User enters command <code>listexpense v/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>ListExpenseCommandParser</code> object. The created object then calls <code>ListExpenseCommandParser#parse("v/food")</code> method.</p>
-</li>
-<li>
-<p><code>ListExpenseCommandParser#parse("v/food")</code> method calls the <code>ArgumentTokenizer#tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
-</li>
-<li>
-<p><code>ListExpenseCommandParse#parse("v/food")</code> method then calls <code>ParserUtil#parseView(argMultiMap#getValue(PREFIX_VIEW)#get())</code> and gets a <code>View</code> object in return.</p>
-</li>
-<li>
-<p>After that, a  <code>ListExpenseCommand</code> object is created with the <code>View</code> object as parameter and return to <code>LogicManager</code>.</p>
-</li>
-<li>
-<p><code>LogicManager</code> then calls <code>ListExpenseCommand#execute()</code>, which calls <code>Model#updateFilteredExpense(predicate)</code>, where predicate is obtained from calling the <code>ListExpenseCommand#getPredicate(view)</code>. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.</p>
-</li>
-<li>
-<p>Finally, the expense list panel will show the new set of expenses. A <code>CommandResult</code> is then created and returned to <code>LogicManager</code>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">2. Design Consideration</a></h4>
-<div class="paragraph">
-<p>This feature can be implemented in different ways in terms of how the specified expenses are filtered out. The alternative ways of implementation are shown below.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Alternative 1 (current choice): Go through all expenses in the <code>FinanceTracker</code> and filter out those that are under the specified view.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement. The original architecture is preserved.</p>
-</li>
-<li>
-<p>Cons: Time-consuming. Large number of expenses in FinanceTracker will take longer time to filter.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Alternative 2: Store expenses in separate files based on different views. Only check files under the specified view when filtering.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: More efficient. Will not go through every single expense.</p>
-</li>
-<li>
-<p>Cons: Will need to alter the original architecture. More storage space will be needed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>By: <code>CS2103-AY1819S2-W15-2</code>      Since: <code>Feb 2019</code></p>
-</div>
-</div>
 <div class="sect1">
-<h2 id="setting-up"><a class="link" href="#setting-up">3. Setting up</a></h2>
+<h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prerequisites"><a class="link" href="#prerequisites">3.1. Prerequisites</a></h3>
+<h3 id="prerequisites"><a class="link" href="#prerequisites">1.1. Prerequisites</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -212,7 +132,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">3.2. Setting up the project in your computer</a></h3>
+<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -270,7 +190,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">3.3. Verifying the setup</a></h3>
+<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">1.3. Verifying the setup</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -283,9 +203,9 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">3.4. Configurations to do before writing code</a></h3>
+<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></h3>
 <div class="sect3">
-<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">3.4.1. Configuring the coding style</a></h4>
+<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">1.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
 <p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify,</p>
 </div>
@@ -317,7 +237,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">3.4.2. Updating documentation to match your fork</a></h4>
+<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
 <div class="paragraph">
 <p>After forking the repo, the documentation will still refer to the <code>CS2103-AY1819S2-W15-2/main</code> repo.</p>
 </div>
@@ -336,7 +256,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">3.4.3. Setting up CI</a></h4>
+<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">1.4.3. Setting up CI</a></h4>
 <div class="paragraph">
 <p>Set up Travis to perform Continuous Integration (CI) for your fork. See <a href="UsingTravis.html">UsingTravis.adoc</a> to learn how to set it up.</p>
 </div>
@@ -372,14 +292,14 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect3">
-<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">3.4.4. Getting started with coding</a></h4>
+<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
 <p>When you are ready to start coding,</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 4.1, &#8220;Architecture&#8221;</a>.</p>
+<p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
 </li>
 <li>
 <p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
@@ -391,10 +311,10 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect1">
-<h2 id="design"><a class="link" href="#design">4. Design</a></h2>
+<h2 id="design"><a class="link" href="#design">2. Design</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">4.1. Architecture</a></h3>
+<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.1. Architecture</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
@@ -483,20 +403,20 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <h4 id="how-the-architecture-components-interact-with-each-other" class="discrete">How the architecture components interact with each other</h4>
 <div class="paragraph">
-<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>delete 1</code>.</p>
+<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>deleteexpense 1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeleteExpense.png" alt="SDforDeleteExpense" width="800">
 </div>
-<div class="title">Figure 3. Component interactions for <code>delete 1</code> command</div>
+<div class="title">Figure 3. Component interactions for <code>deleteexpense 1</code> command</div>
 </div>
 <div class="paragraph">
 <p>The sections below give more details of each component.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Ui"><a class="link" href="#Design-Ui">4.2. UI component</a></h3>
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
@@ -527,7 +447,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Logic"><a class="link" href="#Design-Logic">4.3. Logic component</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.3. Logic component</a></h3>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
@@ -558,7 +478,7 @@ The following class plays an important role at the architecture level:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete 1")</code> API call.</p>
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("deleteexpense 1")</code> API call.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -568,7 +488,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Model"><a class="link" href="#Design-Model">4.4. Model component</a></h3>
+<h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
@@ -599,7 +519,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Storage"><a class="link" href="#Design-Storage">4.5. Storage component</a></h3>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram1.png" alt="StorageClassDiagram1" width="800">
@@ -624,7 +544,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">4.6. Common classes</a></h3>
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.address.commons</code> package.</p>
 </div>
@@ -632,15 +552,15 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">5. Implementation</a></h2>
+<h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">5.1. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">5.1.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedFinanceTracker</code>.
 It extends <code>FinanceTracker</code> with an undo/redo history, stored internally as a <code>financeTrackerStateList</code> and <code>currentStatePointer</code>.
@@ -770,7 +690,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -840,14 +760,14 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">5.2. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.2. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 5.3, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.3, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -878,13 +798,13 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">5.3. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.3. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-feature"><a class="link" href="#listing-feature">5.4. Listing Feature</a></h3>
+<h3 id="listing-feature"><a class="link" href="#listing-feature">3.4. Listing Feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.</p>
 </div>
@@ -895,7 +815,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>This implementation is under Logic and Model components.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">5.4.1. Current implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>listexpense</code>. The other list commands have similar implementations.</p>
 </div>
@@ -928,7 +848,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">5.4.2. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.4.2. Design Consideration</a></h4>
 <div class="paragraph">
 <p>This feature can be implemented in different ways in terms of how the specified expenses are filtered out. The alternative ways of implementation are shown below.</p>
 </div>
@@ -965,7 +885,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="recurring-feature"><a class="link" href="#recurring-feature">5.5. Recurring Feature</a></h3>
+<h3 id="recurring-feature"><a class="link" href="#recurring-feature">3.5. Recurring Feature</a></h3>
 <div class="paragraph">
 <p>The Recurring feature consists of <code>addrecurring</code>, <code>editrecurring</code>, <code>listrecurring</code>, <code>deleterecurring</code> <code>clearrecurring</code>, and <code>convertrecurring</code>.<br></p>
 </div>
@@ -979,12 +899,12 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>This feature also simplifies the deletion and editing of these recurring expenses, and they work in a similar manner.</p>
 </div>
 <div class="sect3">
-<h4 id="convert-recurring-to-expense-feature"><a class="link" href="#convert-recurring-to-expense-feature">5.5.1. Convert Recurring To Expense Feature</a></h4>
+<h4 id="convert-recurring-to-expense-feature"><a class="link" href="#convert-recurring-to-expense-feature">3.5.1. Convert Recurring To Expense Feature</a></h4>
 <div class="paragraph">
 <p>The purpose of this feature is to provide the convenience for users by adding outstanding expenses from all their recurring expenses into the expense list. After adding recurring expenses into the Finance Tracker, the user can call <code>convertrecurring</code> to make the conversion.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h5>
+<h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h5>
 <div class="paragraph">
 <p>Below is a step-by=step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
 </div>
@@ -1020,7 +940,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4"><a class="link" href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">5.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></h3>
+<h3 id="delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4"><a class="link" href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">3.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></h3>
 <div class="paragraph">
 <p>This is still a work in progress.<br></p>
 </div>
@@ -1029,23 +949,23 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="debt-feature"><a class="link" href="#debt-feature">5.7. Debt Feature</a></h3>
+<h3 id="debt-feature"><a class="link" href="#debt-feature">3.7. Debt Feature</a></h3>
 <div class="paragraph">
-<p>The Debt feature consists of <code>adddebt</code>, <code>editdebt</code>, <code>listdebt</code>, <code>deletedebt</code>, <code>cleardebt</code> and <code>paydebt</code>.<br></p>
+<p>The Debt feature consists of <code>adddebt</code>, <code>editdebt</code>, <code>listdebt</code>, <code>deletedebt</code>, <code>selectdebt</code>, <code>cleardebt</code> and <code>paydebt</code>.<br></p>
 </div>
 <div class="paragraph">
 <p>This feature allows users to add debts to the finance tracker and be able to constantly keep track of them. This is done by calling <code>Logic#execute</code> which creates an <code>AddDebtCommand</code>. This command then calls <code>Model#addDebt</code>, adding the specified debt into the debt list.<br></p>
 </div>
 <div class="paragraph">
-<p>Editing, deleting and clearing of debts work in a similar manner.</p>
+<p>Editing, deleting, selecting and clearing of debts work in a similar manner.</p>
 </div>
 <div class="sect3">
-<h4 id="pay-debt-feature"><a class="link" href="#pay-debt-feature">5.7.1. Pay Debt Feature</a></h4>
+<h4 id="pay-debt-feature"><a class="link" href="#pay-debt-feature">3.7.1. Pay Debt Feature</a></h4>
 <div class="paragraph">
 <p>The purpose of this feature is to provide the convenience for users to indicate that they have paid off a particular debt and seamlessly convert that into an expense.<br></p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current Implementation</a></h5>
+<h5 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h5>
 <div class="paragraph">
 <p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>paydebt</code>.</p>
 </div>
@@ -1120,7 +1040,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="debt-notifications-coming-in-v2-0"><a class="link" href="#debt-notifications-coming-in-v2-0">5.7.2. Debt Notifications (Coming in v2.0)</a></h4>
+<h4 id="debt-notifications-coming-in-v2-0"><a class="link" href="#debt-notifications-coming-in-v2-0">3.7.2. Debt Notifications (Coming in v2.0)</a></h4>
 <div class="paragraph">
 <p>This is still a work in progress.<br></p>
 </div>
@@ -1161,7 +1081,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="statistics-feature"><a class="link" href="#statistics-feature">5.8. Statistics Feature</a></h3>
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.8. Statistics Feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.</p>
 </div>
@@ -1172,9 +1092,9 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>This implementation is under Logic and Model components.</p>
 </div>
 <div class="sect3">
-<h4 id="code-stats-code"><a class="link" href="#code-stats-code">5.8.1. <code>stats</code></a></h4>
+<h4 id="code-stats-code"><a class="link" href="#code-stats-code">3.8.1. <code>stats</code></a></h4>
 <div class="sect4">
-<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current implementation</a></h5>
+<h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current implementation</a></h5>
 <div class="paragraph">
 <p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>stats</code>.</p>
 </div>
@@ -1211,7 +1131,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-consideration-3"><a class="link" href="#design-consideration-3">Design Consideration</a></h5>
+<h5 id="design-consideration-2"><a class="link" href="#design-consideration-2">Design Consideration</a></h5>
 <div class="paragraph">
 <p>Work in Progress
 === Budget feature</p>
@@ -1223,12 +1143,15 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>It stores all budgets added by the user and keeps track of the expenses added within the user-specified time frame.</p>
 </div>
 <div class="paragraph">
+<p>This feature includes <code>addbudget</code>, <code>editbudget</code>, <code>deletebudget</code>, <code>selectbudget</code> and <code>clearbudget</code>.</p>
+</div>
+<div class="paragraph">
 <p>The implementation of the budget feature is under the Logic and Model components.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">5.8.2. Current implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.8.2. Current implementation</a></h4>
 <div class="sect4">
 <h5 id="adding-a-budget"><a class="link" href="#adding-a-budget">Adding a budget:</a></h5>
 <div class="paragraph">
@@ -1246,8 +1169,14 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <div class="paragraph">
 <p>User enters the command word <code>deletebudget</code>, followed by the category for which they wish to delete the budget for.</p>
 </div>
+</div>
+<div class="sect4">
+<h5 id="selecting-an-existing-budget"><a class="link" href="#selecting-an-existing-budget">Selecting an existing budget:</a></h5>
 <div class="paragraph">
-<p>For all three actions, the user command gets parsed by the respective parsers: <code>AddBudgetCommandParser</code>, <code>EditBudgetCommandParser</code> and <code>DeleteBudgetCommandParser</code>, which handle the execution of the commands.</p>
+<p>User enters the command word <code>selectbudget</code>, followed by the category for which they wish to select the budget for viewing.</p>
+</div>
+<div class="paragraph">
+<p>For all four actions, the user command gets parsed by the respective parsers: <code>AddBudgetCommandParser</code>, <code>EditBudgetCommandParser</code>, <code>DeleteBudgetCommandParser</code> and <code>SelectBudgetCommandParser</code>, which handle the execution of the commands.</p>
 </div>
 <div class="paragraph">
 <p>Below is the UML sequence diagram of a scenario for the <code>addbudget</code> command.</p>
@@ -1256,6 +1185,9 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <div class="content">
 <img src="images/AddBudgetSequenceDiagram.png" alt="AddBudgetSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p>Editing, deleting and selecting budgets work similarly to adding budgets.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1282,7 +1214,7 @@ If the added expense is during the time of the budget, the totalSpent variable i
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements"><a class="link" href="#future-enhancements">5.8.3. Future Enhancements</a></h4>
+<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.8.3. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>The Budget class has a boolean method <code>overlaps(Budget other)</code> which returns true if two budgets of the same category have overlapping time frames.
 This method was included with the idea of allowing the user to add multiple budgets for the same category but for different time frames.</p>
@@ -1296,7 +1228,7 @@ For example, if a user wants to limit their daily spending to $20, maybe an <cod
 </div>
 </div>
 <div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">6. Documentation</a></h2>
+<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We use asciidoc for writing documentation.</p>
@@ -1314,20 +1246,20 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 </table>
 </div>
 <div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">6.1. Editing Documentation</a></h3>
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">6.2. Publishing Documentation</a></h3>
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">6.3. Converting Documentation to PDF format</a></h3>
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -1358,7 +1290,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 </div>
 </div>
 <div class="sect2">
-<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">6.4. Site-wide Documentation Settings</a></h3>
+<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/build.gradle"><code>build.gradle</code></a> file specifies some project-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how all documentation files within this project are rendered.</p>
 </div>
@@ -1417,7 +1349,7 @@ This will render the SE-EDU navigation bar at the top of the page, and add some 
 </table>
 </div>
 <div class="sect2">
-<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">6.5. Per-file Documentation Settings</a></h3>
+<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></h3>
 <div class="paragraph">
 <p>Each <code>.adoc</code> file may also specify some file-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how the file is rendered.</p>
 </div>
@@ -1474,7 +1406,7 @@ One of: <code>UserGuide</code>, <code>DeveloperGuide</code>, <code>LearningOutco
 </table>
 </div>
 <div class="sect2">
-<h3 id="site-template"><a class="link" href="#site-template">6.6. Site Template</a></h3>
+<h3 id="site-template"><a class="link" href="#site-template">4.6. Site Template</a></h3>
 <div class="paragraph">
 <p>The files in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/docs/stylesheets"><code>docs/stylesheets</code></a> are the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS stylesheets</a> of the site.
 You can modify them to change some properties of the site&#8217;s design.</p>
@@ -1503,10 +1435,10 @@ The SE-EDU team does not provide support for modified template files.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Testing"><a class="link" href="#Testing">7. Testing</a></h2>
+<h2 id="Testing"><a class="link" href="#Testing">5. Testing</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">7.1. Running Tests</a></h3>
+<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -1568,7 +1500,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 </div>
 </div>
 <div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">7.2. Types of tests</a></h3>
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">5.2. Types of tests</a></h3>
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
@@ -1610,7 +1542,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">7.3. Troubleshooting Testing</a></h3>
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
 <div class="paragraph">
 <p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
@@ -1628,34 +1560,34 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">8. Dev Ops</a></h2>
+<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">8.1. Build Automation</a></h3>
+<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">8.2. Continuous Integration</a></h3>
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">8.3. Coverage Reporting</a></h3>
+<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">6.3. Coverage Reporting</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://coveralls.io/">Coveralls</a> to track the code coverage of our projects. See <a href="UsingCoveralls.html">UsingCoveralls.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="documentation-previews"><a class="link" href="#documentation-previews">8.4. Documentation Previews</a></h3>
+<h3 id="documentation-previews"><a class="link" href="#documentation-previews">6.4. Documentation Previews</a></h3>
 <div class="paragraph">
 <p>When a pull request has changes to asciidoc files, you can use <a href="https://www.netlify.com/">Netlify</a> to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <a href="UsingNetlify.html">UsingNetlify.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">8.5. Making a Release</a></h3>
+<h3 id="making-a-release"><a class="link" href="#making-a-release">6.5. Making a Release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -1677,7 +1609,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">8.6. Managing Dependencies</a></h3>
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing Dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Finance Tracker depends on the <a href="https://github.com/FasterXML/jackson">Jackson library</a> for JSON parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:</p>
 </div>
@@ -3690,4 +3622,4 @@ Expected: No recurring expense created. Error message for invalid date shown in 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:52:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 16:00:19 UTC</div></div></div></body></html>

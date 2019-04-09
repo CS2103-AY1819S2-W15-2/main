@@ -27,7 +27,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to add, edit, delete debts, as well as easily convert these debts into an expense once the debt is cleared. Integrated to work with current undo/redo, history and list commands.</p>
+<p>What it does: allows the user to add, edit, delete, select debts, as well as easily convert these debts into an expense once the debt is cleared. Integrated to work with current undo/redo, history and list commands.</p>
 </li>
 <li>
 <p>Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their debts owed to other entities.</p>
@@ -249,6 +249,40 @@ Deletes the 5th debt in the finance tracker.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="selecting-a-debt-code-selectdebt-code"><a class="link" href="#selecting-a-debt-code-selectdebt-code">Selecting a debt: <code>selectdebt</code></a></h3>
+<div class="paragraph">
+<p>Selects the specified debt from the finance tracker.
+Format: <code>selectdebt INDEX</code><br>
+Shortcut: <code>sd INDEX</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the debt at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed debt list. The index must be a positive integer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listdebt v/all</code><br>
+<code>selectdebt 5</code><br>
+Selects the 5th debt in the finance tracker.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="clearing-all-debts-code-cleardebt-code"><a class="link" href="#clearing-all-debts-code-cleardebt-code">Clearing all debts: <code>cleardebt</code></a></h3>
 <div class="paragraph">
 <p>Clears all debts from the finance tracker.<br>
@@ -348,13 +382,13 @@ Converts the 3rd debt in the finance tracker into an expense.</p>
 <div class="sect2">
 <h3 id="debt-feature"><a class="link" href="#debt-feature">Debt Feature</a></h3>
 <div class="paragraph">
-<p>The Debt feature consists of <code>adddebt</code>, <code>editdebt</code>, <code>listdebt</code>, <code>deletedebt</code>, <code>cleardebt</code> and <code>paydebt</code>.<br></p>
+<p>The Debt feature consists of <code>adddebt</code>, <code>editdebt</code>, <code>listdebt</code>, <code>deletedebt</code>, <code>selectdebt</code>, <code>cleardebt</code> and <code>paydebt</code>.<br></p>
 </div>
 <div class="paragraph">
 <p>This feature allows users to add debts to the finance tracker and be able to constantly keep track of them. This is done by calling <code>Logic#execute</code> which creates an <code>AddDebtCommand</code>. This command then calls <code>Model#addDebt</code>, adding the specified debt into the debt list.<br></p>
 </div>
 <div class="paragraph">
-<p>Editing, deleting and clearing of debts work in a similar manner.</p>
+<p>Editing, deleting, selecting and clearing of debts work in a similar manner.</p>
 </div>
 <div class="sect3">
 <h4 id="pay-debt-feature"><a class="link" href="#pay-debt-feature">Pay Debt Feature</a></h4>
@@ -478,4 +512,4 @@ Converts the 3rd debt in the finance tracker into an expense.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:52:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 16:00:19 UTC</div></div></div></body></html>

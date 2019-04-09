@@ -27,7 +27,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to efficiently list expenses, debts and recurring expenses based on the view specified. Only items that match the view will be listed. For example, listing expense with view as the category food will lead to only expenses with the category food to be listed.</p>
+<p>What it does: allows the user to efficiently list expenses, debts and recurring expenses based on the view specified. Only items that match the view will be listed. For example, listing expense with view as the category food such as command <code>listexpense v/food</code> will lead to only expenses with the category food to be listed.</p>
 </li>
 <li>
 <p>Justification: This feature improves the product significantly because a user can conveniently look at groups of items based on the view specified rather than spending time to scroll through all the expenses/debts/recurring expenses.</p>
@@ -37,9 +37,6 @@
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>Minor enhancement</strong>: added and handled <strong>all UI components</strong> in Personal Finance Tracker.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jamessspanggg&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-03-26&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Code collated by reposense</a>]</p>
@@ -61,6 +58,9 @@
 <li>
 <p>Check all pull requests done by group mates</p>
 </li>
+<li>
+<p>Managed release for <code>v1.3</code> on GitHub</p>
+</li>
 </ul>
 </div>
 </li>
@@ -79,6 +79,9 @@
 </li>
 <li>
 <p>Wrote additional tests for existing features to increase coverage from 74.04% to 80.56% (Pull request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/194">#194</a>)</p>
+</li>
+<li>
+<p>Refactor <code>Person</code> classes from AddressBook4 to <code>Expense</code> classes</p>
 </li>
 </ul>
 </div>
@@ -179,7 +182,7 @@ Shortcut: <code>le v/VIEW</code></p>
 <p>v/CATEGORY: displays list of expenses with CATEGORY such as “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive</p>
 </li>
 <li>
-<p>v/$10, v/$100, v/$1000: display list of expenses with amount greater than $10, $100 or $1000</p>
+<p>v/$10, v/$100, v/$1000: display list of expenses with amount greater than or equal to $10, $100 or $1000</p>
 </li>
 </ul>
 </div>
@@ -488,4 +491,4 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:52:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 16:00:19 UTC</div></div></div></body></html>
