@@ -331,5 +331,69 @@ Shortcut: <code>cre</code></p>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="recurring-feature"><a class="link" href="#recurring-feature">Recurring Feature</a></h3>
+<div class="paragraph">
+<p>The Recurring feature consists of <code>addrecurring</code>, <code>editrecurring</code>, <code>listrecurring</code>, <code>deleterecurring</code> <code>clearrecurring</code>, and <code>convertrecurring</code>.<br></p>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-09 16:00:19 UTC</div></div></div></body></html>
+<div class="paragraph">
+<p>Recurring expenses are expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees.<br></p>
+</div>
+<div class="paragraph">
+<p>This feature allows users to add recurring expenses to the finance tracker and be able to constantly keep track of them. This is done by calling <code>Logic#execute</code> which creates an <code>AddRecurringCommand</code>. This command then calls <code>Model#addRecurring</code>, adding the specified recurring into the recurring list.<br></p>
+</div>
+<div class="paragraph">
+<p>This feature also simplifies the deletion and editing of these recurring expenses, and they work in a similar manner.</p>
+</div>
+<div class="sect3">
+<h4 id="convert-recurring-to-expense-feature"><a class="link" href="#convert-recurring-to-expense-feature">Convert Recurring To Expense Feature</a></h4>
+<div class="paragraph">
+<p>The purpose of this feature is to provide the convenience for users by adding outstanding expenses from all their recurring expenses into the expense list. After adding recurring expenses into the Finance Tracker, the user can call <code>convertrecurring</code> to make the conversion.</p>
+</div>
+<div class="sect4">
+<h5 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h5>
+<div class="paragraph">
+<p>Below is a step-by=step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command <code>convertrecurring</code>, to add outstanding expenses from all their recurring expenses into the expense list. This command is executed by <code>LogicManager</code>, which calls <code>FinanceTrackerParser#parseCommand("convertrecurring")</code>. This creates a <code>ConvertRecurringToExpenseCommand</code> object and returned to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> calls <code>ConvertRecurringToExpenseCommand#execute</code>, which will call Model#getFilteredRecurringList() to retrieve the list of recurrings in the financetracker.</p>
+</li>
+<li>
+<p>The programme then iterates through the recurring list, and for each recurring, checks the recurring&#8217;s <code>lastConvertedDate</code>, which is the last time the recurring has gone through a <code>convertrecurring</code> check.</p>
+</li>
+<li>
+<p>If the recurring&#8217;s <code>lastConvertedDate</code> is before the current date, this recurring will have to be checked again for outstanding expenses that can potentially be added.</p>
+</li>
+<li>
+<p>The programme then calls Recurring#getRecurringListofExpenses to retrieve the list of expenses that are supposed to be added by this recurring, and iterates through this expense list.</p>
+</li>
+<li>
+<p>If the expense&#8217;s date is before or equals to the current date, and after the <code>lastConvertedDate</code>, this recurring expense will have to be converted into an expense and added into the FinanceTracker. This is done by calling Model#addExpense(recurringListOfExpenses.get(j)).</p>
+</li>
+<li>
+<p>This is done for each expense of the recurring. After the iteration, the recurring&#8217;s <code>lastConvertedDate</code> is set to the current date.</p>
+</li>
+<li>
+<p>This is done for each recurring in the list.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4"><a class="link" href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></h3>
+<div class="paragraph">
+<p>This is still a work in progress.<br></p>
+</div>
+<div class="paragraph">
+<p>The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.</p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-10 06:00:29 UTC</div></div></div></body></html>
