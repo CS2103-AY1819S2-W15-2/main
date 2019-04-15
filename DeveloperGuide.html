@@ -34,10 +34,9 @@
 <li><a href="#Implementation-Configuration">3.3. Configuration</a></li>
 <li><a href="#listing-feature">3.4. Listing Feature</a></li>
 <li><a href="#recurring-feature">3.5. Recurring Feature</a></li>
-<li><a href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">3.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></li>
-<li><a href="#debt-feature">3.7. Debt Feature</a></li>
-<li><a href="#statistics-feature">3.8. Statistics Feature</a></li>
-<li><a href="#budget-feature">3.9. Budget feature</a></li>
+<li><a href="#debt-feature">3.6. Debt Feature</a></li>
+<li><a href="#statistics-feature">3.7. Statistics Feature</a></li>
+<li><a href="#budget-feature">3.8. Budget Feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -419,7 +418,7 @@ The following class plays an important role at the architecture level:</p>
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
+<img src="images/UiComponentClassDiagram.png" alt="UiComponentClassDiagram" width="800">
 </div>
 <div class="title">Figure 4. Structure of the UI Component</div>
 </div>
@@ -427,7 +426,7 @@ The following class plays an important role at the architecture level:</p>
 <p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>ExpenseListPanel</code>, <code>BudgetListPanel</code>, <code>DebtListPanel</code>, <code>RecurringListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>ExpenseListPanel</code>, <code>BudgetListPanel</code>, <code>DebtListPanel</code>, <code>RecurringExpenseListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class. Each individual <code>ListPanel</code> consists of their respective <code>Card</code>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/cs2103-ay1819s2-w15-2/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -809,7 +808,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.</p>
 </div>
 <div class="paragraph">
-<p>Listing feature consists of <code>listexpense</code>, <code>listrecurring</code> and <code>listdebt</code>.</p>
+<p>Listing feature consists of commands such as <code>listexpense</code>, <code>listrecurring</code> and <code>listdebt</code>.</p>
 </div>
 <div class="paragraph">
 <p>This implementation is under Logic and Model components.</p>
@@ -906,7 +905,12 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <div class="sect4">
 <h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h5>
 <div class="paragraph">
-<p>Below is a step-by=step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ConvertRecurringSequenceDiagram.png" alt="ConvertRecurringSequenceDiagram" width="800">
+</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -929,7 +933,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>If the expense&#8217;s date is before or equals to the current date, and after the <code>lastConvertedDate</code>, this recurring expense will have to be converted into an expense and added into the FinanceTracker. This is done by calling Model#addExpense(recurringListOfExpenses.get(j)).</p>
 </li>
 <li>
-<p>This is done for each expense of the recurring. After the iteration, the recurring&#8217;s <code>lastConvertedDate</code> is set to the current date.</p>
+<p>This is done for every expense that is supposed to be added by this recurring to determine which has to be added into the expense list. After the iteration, the recurring&#8217;s <code>lastConvertedDate</code> is set to the current date.</p>
 </li>
 <li>
 <p>This is done for each recurring in the list.</p>
@@ -938,18 +942,21 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="advanced-delete-and-edit-recurring-coming-in-v2-0"><a class="link" href="#advanced-delete-and-edit-recurring-coming-in-v2-0">3.5.2. Advanced Delete and Edit Recurring (coming in v2.0)</a></h4>
+<div class="paragraph">
+<p>This is still a work in progress.</p>
+</div>
+<div class="paragraph">
+<p>Currently, <code>deleterecurring</code> does not delete expenses already added by the deleted recurring, and <code>editrecurring</code> does not edit expenses already added by the edited recurring.<br></p>
+</div>
+<div class="paragraph">
+<p>The purpose of this feature is to make <code>deleterecurring</code> and <code>editrecurring</code> more advanced such that the expenses already added by the recurring to be deleted or edited will also reflect the new changes.<br></p>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4"><a class="link" href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">3.6. Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></h3>
-<div class="paragraph">
-<p>This is still a work in progress.<br></p>
-</div>
-<div class="paragraph">
-<p>The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="debt-feature"><a class="link" href="#debt-feature">3.7. Debt Feature</a></h3>
+<h3 id="debt-feature"><a class="link" href="#debt-feature">3.6. Debt Feature</a></h3>
 <div class="paragraph">
 <p>The Debt feature consists of <code>adddebt</code>, <code>editdebt</code>, <code>listdebt</code>, <code>deletedebt</code>, <code>selectdebt</code>, <code>cleardebt</code> and <code>paydebt</code>.<br></p>
 </div>
@@ -960,7 +967,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>Editing, deleting, selecting and clearing of debts work in a similar manner.</p>
 </div>
 <div class="sect3">
-<h4 id="pay-debt-feature"><a class="link" href="#pay-debt-feature">3.7.1. Pay Debt Feature</a></h4>
+<h4 id="pay-debt-feature"><a class="link" href="#pay-debt-feature">3.6.1. Pay Debt Feature</a></h4>
 <div class="paragraph">
 <p>The purpose of this feature is to provide the convenience for users to indicate that they have paid off a particular debt and seamlessly convert that into an expense.<br></p>
 </div>
@@ -1040,7 +1047,46 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="debt-notifications-coming-in-v2-0"><a class="link" href="#debt-notifications-coming-in-v2-0">3.7.2. Debt Notifications (Coming in v2.0)</a></h4>
+<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">3.6.2. Design Consideration</a></h4>
+<div class="paragraph">
+<p>This feature can be implemented in different ways in terms of the architecture of the Model component. The alternative ways of implementation are shown below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1 (current choice): Debt and Expense classes do not inherit from a common Interface. Container objects such as expense list and debt list, will be initialized to hold objects of their own individual classes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lower level of coupling between Expense and Debt classes.</p>
+</li>
+<li>
+<p>Cons: Slower and less flexibility. Conversion between classes, e.g. from Debt to Expense, requires extracting information from debt, creating a new expense, then deleting the old debt.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Debt and Expense classes inherit from a common Interface. Container objects such as expense list and debt list, will be initialized to hold objects of this common Interface.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Greater flexibility. Polymorphism allows for easy conversion between different types of entries, such as from debt to expense, simply by moving them across different lists. This will be useful considering that our Finance Tracker will need significant amounts of conversion between different objects.</p>
+</li>
+<li>
+<p>Cons: Higher level of coupling between Expense and Debt classes.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ultimately, the first option was chosen because a lower level of coupling will allow for easier maintenance, integration and testing. Also, it is not significantly slower thus the Finance Tracker will still be able to complete debt-related commands within 2 seconds, which is one of our non-functional requirements.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="debt-notifications-coming-in-v2-0"><a class="link" href="#debt-notifications-coming-in-v2-0">3.6.3. Debt Notifications (Coming in v2.0)</a></h4>
 <div class="paragraph">
 <p>This is still a work in progress.<br></p>
 </div>
@@ -1081,7 +1127,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.8. Statistics Feature</a></h3>
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.7. Statistics Feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.</p>
 </div>
@@ -1092,54 +1138,55 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>This implementation is under Logic and Model components.</p>
 </div>
 <div class="sect3">
-<h4 id="code-stats-code"><a class="link" href="#code-stats-code">3.8.1. <code>stats</code></a></h4>
+<h4 id="code-stats-code"><a class="link" href="#code-stats-code">3.7.1. <code>stats</code></a></h4>
 <div class="sect4">
 <h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current implementation</a></h5>
 <div class="paragraph">
 <p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>stats</code>.</p>
 </div>
-<div class="paragraph">
-<p>(UML here)</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatCommandSequenceDiagram.png" alt="StatCommandSequenceDiagram" width="800">
+</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User enters command <code>stats c/food</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>StatsCommandParser</code> object. The created object then calls <code>StatsCommandParser.parse("v/food")</code> method.</p>
+<p>User enters command <code>stats sd/01-01-2019</code>. The command is received by <code>FinanceTrackerParser</code>, which then creates a <code>StatsCommandParser</code> object. The created object then calls <code>StatsCommandParser.parse("stats sd/01-01-2019")</code> method. A <code>StatsCommand</code> object is then created with <code>StatsCommand(01-01-2019, 01-02-2019)</code> and returned to the <code>LogicManager</code></p>
 </li>
 <li>
-<p><code>StatsCommandParser.parse("v/food")</code> method calls the <code>ArgumentTokenizer.tokenize()</code> to tokenize the input <code>v/food</code> and stores it in an <code>ArgumentMultiMap</code> object.</p>
+<p><code>Logic Manager</code> will call the <code>execute</code> method of the <code>StatsCommand</code> object which calls the <code>calculateStatistics("stats', 01-01-2019, 01-02-2019, null)</code> method in <code>Model</code>. The <code>Model Manager</code> will handle this command and duplicate the <code>Expense</code> list held in the Financial Tracker, creating a snapshot. The <code>Model Manager</code> will instantiate a <code>Statistics</code> object and call the <code>calculateStatistics("stats', 01-01-2019, 01-02-2019, null)</code> method.</p>
 </li>
 <li>
-<p><code>StatsCommandParse.parse("v/food")</code> method then calls <code>ParserUtil.parseCategory(argMultiMap.getCategory(PREFIX_Category).get())</code> and gets a <code>Category</code> object in return.</p>
+<p>The <code>calculateStatistics</code> method in <code>Statistics</code> is a wrapper that will call the appropriate method <code>basicStats(01-01-2019, 01-02-2019)</code> after reading the String <code>"stats"</code> that was passed in.</p>
 </li>
 <li>
-<p><code>StatsCommandParser</code> will then create a relevant <code>Statistic</code> object.</p>
+<p><code>basicStats</code> calls the method <code>extractRelevantExpense(01-01-2019, 01-02-2019)</code> which takes only the <code>Expenses</code> that lie within the time range and adds them to a new <code>Expense</code> list <code>data</code>. These relevant <code>Expenses</code> are then processed by the <code>generateSummary(data)</code> method. This method will return a table of relevant statistics.</p>
 </li>
 <li>
-<p>After that, a <code>StatsCommand</code> object is created with the <code>Statistic</code> object as parameter and return to <code>LogicManager</code>.</p>
+<p>The methods <code>trimTable(table)</code>, <code>convertDataToString(trimmedtable)</code> are called to process this table. <code>htmlTableBuilder(header, table)</code> is called to generate the HTML code required to show the Statistics in the BrowserPanel.</p>
 </li>
 <li>
-<p><code>LogicManager</code> then calls <code>StatsCommand.execute()</code>, which calls <code>Model.getStatistics(Statistics)</code> using the <code>Statistic</code> object created in step 3</p>
+<p><code>Model Manager</code> calls <code>setStatistics(statistics)</code> which sets the observable <code>Statistics</code> in <code>ModelManager</code>.</p>
 </li>
 <li>
-<p><code>Model.getStatistics(Statistics)</code> will call <code>Statistics.calculate</code> which will generate the appropriate results</p>
-</li>
-<li>
-<p>The result will be shown on the UI</p>
+<p>The listener in <code>BrowserPanel</code> will detect the change and display the HTML page showing the statistics</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-consideration-2"><a class="link" href="#design-consideration-2">Design Consideration</a></h5>
+<h5 id="future-implementation-2"><a class="link" href="#future-implementation-2">Future Implementation</a></h5>
 <div class="paragraph">
-<p>Work in Progress</p>
+<p>Users will be given the option to choose a Visual Representation method.
+This will determine the output format of the statistics. Currently, statistics can only be displayed in table format. However, in the future a feature will be implemented to show the statistics in graphical or pictorial formats.
+These could include pie charts, bar charts, line graphs, etc.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="budget-feature"><a class="link" href="#budget-feature">3.9. Budget feature</a></h3>
+<h3 id="budget-feature"><a class="link" href="#budget-feature">3.8. Budget Feature</a></h3>
 <div class="paragraph">
 <p>This feature allows users to set budgets for different categories so they can limit the amount spent for each category.</p>
 </div>
@@ -1153,7 +1200,7 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>The implementation of the budget feature is under the Logic and Model components.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.9.1. Current implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.8.1. Current implementation</a></h4>
 <div class="sect4">
 <h5 id="adding-a-budget"><a class="link" href="#adding-a-budget">Adding a budget:</a></h5>
 <div class="paragraph">
@@ -1181,15 +1228,36 @@ If the <code>currentStatePointer</code> is at index <code>financeTrackerStateLis
 <p>For all four actions, the user command gets parsed by the respective parsers: <code>AddBudgetCommandParser</code>, <code>EditBudgetCommandParser</code>, <code>DeleteBudgetCommandParser</code> and <code>SelectBudgetCommandParser</code>, which handle the execution of the commands.</p>
 </div>
 <div class="paragraph">
-<p>Below is the UML sequence diagram of a scenario for the <code>addbudget</code> command.</p>
+<p>Below is the UML sequence diagram of a scenario for the <code>addbudget</code> command. Editing, deleting and selecting budgets work similarly to adding budgets.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddBudgetSequenceDiagram.png" alt="AddBudgetSequenceDiagram" width="800">
 </div>
 </div>
-<div class="paragraph">
-<p>Editing, deleting and selecting budgets work similarly to adding budgets.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command <code>addbudget c/food $/1000 ed/30-06-2019</code>, to add a new budget for the <code>FOOD</code> category.
+This command is executed by <code>LogicManager</code>, which calls <code>FinanceTrackerParser#parseCommand("addbudget c/food $/1000 ed/30-06-2019")</code>.
+This creates a new <code>AddBudgetCommandParser</code> object which will help parse the input by the user.</p>
+</li>
+<li>
+<p>The newly created object calls <code>parse("c/food $/1000 ed/30-06-2019")</code> which in turn calls <code>ArgumentTokenizer#tokenize("c/food $/1000 ed/30-06-2019", "/c", "$/", "sd/", "ed/", "r/")</code> to split the arguments into the different parameters of a budget. This returns an <code>argMultiMap</code> containing the split input.</p>
+</li>
+<li>
+<p>The <code>AddBudgetCommandParser</code> object then calls <code>ParserUtil#parseCategory(argMultiMap.getValue("c/").get())</code> <code>ParserUtil#parseAmount(argMultiMap.getValue("$/").get())</code> and <code>ParserUtil#parseDate(argMultiMap.getValue("ed/").get())</code> to parse the arguments provided by the user into the correct formats of the relevant parameters. As the user does not specify a start date in this case, the programme will use the local date on the system&#8217;s clock. An <code>AddBudgetCommand</code> object containing the parameter values provided and today&#8217;s date as the start date is then created and returned to the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> calls <code>AddBudgetCommand#execute()</code>, which will call <code>Model#updateFilteredBudgetList(Predicate&lt;Budget&gt;)</code> to update the list of budgets stored in the finance tracker.</p>
+</li>
+<li>
+<p><code>Model#addBudget(budget)</code> is then called to add the <code>budget</code> into the budget list.</p>
+</li>
+<li>
+<p>The command result is then returned to the <code>LogicManager</code> which then returns it to the <code>UI</code> where the changes are then reflected on the user interface.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect4">
@@ -1216,13 +1284,17 @@ If the added expense is during the time of the budget, the totalSpent variable i
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.9.2. Future Enhancements</a></h4>
+<h4 id="future-enhancements"><a class="link" href="#future-enhancements">3.8.2. Future Enhancements</a></h4>
 <div class="paragraph">
 <p>The Budget class has a boolean method <code>overlaps(Budget other)</code> which returns true if two budgets of the same category have overlapping time frames.
 This method was included with the idea of allowing the user to add multiple budgets for the same category but for different time frames.</p>
 </div>
 <div class="paragraph">
-<p>Another possible enhancement would be to allow the user to set a recurring budget.
+<p>Another future enhancement would be to notify the user when a certain budget is about to exceed. For example, if the percentage spent within the time frame reaches say 90% of the budget amount, the user will receive an e-mail or notification of some sort to alert the user.
+Another notification can also be sent when the budget is actually exceeded.</p>
+</div>
+<div class="paragraph">
+<p>Yet another possible enhancement would be to allow the user to set a recurring budget.
 For example, if a user wants to limit their daily spending to $20, maybe an <code>addrecurringbudget c/food $/20 f/d</code> command, similar to the recurring expense command, could be implemented so that the user does not have to add a budget everyday.</p>
 </div>
 </div>
@@ -2903,7 +2975,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-16-view-statistics" class="discrete">Use case 16: View statistics</h3>
+<h3 id="use-case-16-view-statistics-summary" class="discrete">Use case 16: View statistics summary</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2911,18 +2983,6 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <ol class="arabic">
 <li>
 <p>User chooses to view statistics</p>
-</li>
-<li>
-<p>PFT prompts user for mode</p>
-</li>
-<li>
-<p>User enters mode</p>
-</li>
-<li>
-<p>PFT prompts user for category</p>
-</li>
-<li>
-<p>User enters category</p>
 </li>
 <li>
 <p>PFT prompts user for start date</p>
@@ -2960,7 +3020,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>Use case resumes from step 12</p>
+<p>Use case resumes from step 8</p>
 </li>
 </ul>
 </div>
@@ -2976,41 +3036,31 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </li>
 <li>
-<p>3(5,7,9,11)a. PFT detects wrong format or incorrect data</p>
+<p>3(5)a. PFT detects wrong format or incorrect data</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3(5,7,9,11)a1. PFT requests for correct format</p>
+<p>3(5)a1. PFT requests for correct format</p>
 </li>
 <li>
-<p>3(5,7,9,11)a2. User enters correct data</p>
+<p>3(5)a2. User enters correct data</p>
 </li>
 <li>
-<p>Use case resumes from step 4(6,8,10,12)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>3b. User chooses to display statistics by the mode of categories</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>Use case resumes from step 6</p>
+<p>Use case resumes from step 4(6)</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="use-case-17-view-trend-macro-statistics" class="discrete">Use case 17: View trend macro statistics</h3>
+<h3 id="use-case-17-view-statistics-trend" class="discrete">Use case 17: View statistics trend</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User chooses to view trend macro statistics</p>
+<p>User chooses to view statistics trend</p>
 </li>
 <li>
 <p>PFT prompts user for start date</p>
@@ -3031,18 +3081,6 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <p>User enters period</p>
 </li>
 <li>
-<p>PFT prompts user for category</p>
-</li>
-<li>
-<p>User enters category</p>
-</li>
-<li>
-<p>PFT prompts user for visual representation method</p>
-</li>
-<li>
-<p>User enters visual representation method</p>
-</li>
-<li>
 <p>PFT displays the statistics requested</p>
 <div class="paragraph">
 <p>Use case ends</p>
@@ -3060,7 +3098,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>Use case resumes from step 12.</p>
+<p>Use case resumes from step 8.</p>
 </li>
 </ul>
 </div>
@@ -3076,31 +3114,31 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </li>
 <li>
-<p>3(5,7,9,11)a. PFT detects wrong format or incorrect data</p>
+<p>3(5,7)a. PFT detects wrong format or incorrect data</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3(5,7,9,11)a1. PFT requests for correct format</p>
+<p>3(5,7)a1. PFT requests for correct format</p>
 </li>
 <li>
-<p>3(5,7,9,11)a2. User enters correct data</p>
+<p>3(5,7)a2. User enters correct data</p>
 </li>
 <li>
-<p>Use case resumes from step 4(6,8,10,12).</p>
+<p>Use case resumes from step 4(6,8).</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="use-case-18-view-compare-macro-statistics" class="discrete">Use case 18: View compare macro statistics</h3>
+<h3 id="use-case-18-compare-2-statistic-summaries" class="discrete">Use case 18: Compare 2 statistic summaries</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User chooses to view compare macro statistics</p>
+<p>User chooses to compare statistics</p>
 </li>
 <li>
 <p>PFT prompts user for date 1</p>
@@ -3115,40 +3153,10 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <p>User enters date</p>
 </li>
 <li>
-<p>PFT prompts user for date 3</p>
-</li>
-<li>
-<p>User enters date</p>
-</li>
-<li>
-<p>PFT prompts user for date 4</p>
-</li>
-<li>
-<p>User enters date</p>
-</li>
-<li>
-<p>PFT prompts user for date 5</p>
-</li>
-<li>
-<p>User enters date</p>
-</li>
-<li>
 <p>PFT prompts user for period</p>
 </li>
 <li>
 <p>User enters period</p>
-</li>
-<li>
-<p>PFT prompts user for category</p>
-</li>
-<li>
-<p>User enters category</p>
-</li>
-<li>
-<p>PFT prompts user for visual representation method</p>
-</li>
-<li>
-<p>User enters visual representation method</p>
 </li>
 <li>
 <p>PFT displays the statistics requested</p>
@@ -3168,7 +3176,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>Use case resumes from step 12.</p>
+<p>Use case resumes from step 8.</p>
 </li>
 </ul>
 </div>
@@ -3184,27 +3192,17 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </li>
 <li>
-<p>3(5,7,9,11,13,15,17)a. PFT detects wrong format or incorrect data</p>
+<p>3(5,7)a. PFT detects wrong format or incorrect data</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3(5,7,9,11,13,15,17)a1. PFT requests for correct format</p>
+<p>3(5,7)a1. PFT requests for correct format</p>
 </li>
 <li>
-<p>3(5,7,9,11,13,15,17)a2. User enters correct data</p>
+<p>3(5,7)a2. User enters correct data</p>
 </li>
 <li>
-<p>Use case resumes from step 4(6,8,10,12,14,16,18)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>7(9)b User enters data that is not a date</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>Use case resumes from step 12.</p>
+<p>Use case resumes from step 4(6,8)</p>
 </li>
 </ul>
 </div>
@@ -3519,11 +3517,6 @@ Command: <code>addbudget c/travel ed/31-12-2020</code>
 Expected: No budget is created. Error message that command format is invalid  shown in status message.</p>
 </li>
 <li>
-<p>Test case: adding a budget with start date before today&#8217;s date<br>
-Command: <code>addbudget c/work $/100 sd/01-01-2019 ed/31-12-2019</code><br>
-Expected: No budget is created. Error message for invalid start date is shown in status message.</p>
-</li>
-<li>
 <p>Test case: adding a budget with end date before start date<br>
 Command: <code>addbudget c/food $/250 sd/01-01-2020 ed/30-06-2019</code><br>
 Expected: No budget is created. Error message for invalid end date is shown in status message.</p>
@@ -3599,4 +3592,4 @@ Expected: No recurring expense created. Error message for invalid date shown in 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-10 06:21:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:12:38 UTC</div></div></div></body></html>

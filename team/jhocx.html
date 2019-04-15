@@ -27,19 +27,19 @@
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to add, edit, delete recurrings, as well as easily convert these recurrings into an expense at appropriate times. Integrated to work with current undo/redo, history and list commands.</p>
+<p>What it does: allows the user to add, edit, delete recurring expenses, as well as easily convert these recurring expenses into expenses at appropriate times. Integrated to work with current undo/redo, history and list commands.</p>
 </li>
 <li>
 <p>Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their recurring expenses, expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees.</p>
 </li>
 <li>
-<p>Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving recurring expenses.</p>
+<p>Highlights: Recurring expenses form a significant portion of a user&#8217;s expenses and thus tracking recurring expenses is a core feature of a finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving recurring expenses.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jhocx&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-03-26&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">code collated by reposense</a>]</p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jhocx&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-04-10&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">code collated by reposense</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -69,10 +69,23 @@
 <p>Update storage component in Developer&#8217;s Guide</p>
 </li>
 <li>
-<p>Added the implementation of recurrings in Developer&#8217;s Guide</p>
+<p>Added the implementation of recurrings in Developer&#8217;s Guide (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/227">#227</a>)</p>
 </li>
 <li>
-<p>In charge of UserGuide in general.</p>
+<p>In charge of UserGuide in general. (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/227">#227</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancement to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Refactored code to transform from AddressBook4 to FinanceTracker. (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/69/">#69</a>)</p>
+</li>
+<li>
+<p>Refactored code in storage to transform from AddressBook4 to FinanceTracker. (Pull Request <a href="https://github.com/CS2103-AY1819S2-W15-2/main/pull/66">#66</a>)</p>
 </li>
 </ul>
 </div>
@@ -116,13 +129,13 @@ Shortcut: <code>lr v/VIEW</code></p>
 <p>v/all: displays entire list of recurrings</p>
 </li>
 <li>
-<p>v/day: displays list of recurrings added since a day ago</p>
+<p>v/day: displays list of recurrings with date within a day ago</p>
 </li>
 <li>
-<p>v/month: displays list of recurrings added since a month ago</p>
+<p>v/month: displays list of recurrings with date within a month ago</p>
 </li>
 <li>
-<p>v/year: displays list of recurrings added since a year ago</p>
+<p>v/year: displays list of recurrings with date within a year ago</p>
 </li>
 <li>
 <p>v/CATEGORY: displays list of recurrings with CATEGORY</p>
@@ -301,6 +314,40 @@ Deletes the 2nd recurring in the finance tracker.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="selecting-a-recurring-code-selectrecurring-code"><a class="link" href="#selecting-a-recurring-code-selectrecurring-code">Selecting a recurring : <code>selectrecurring</code></a></h3>
+<div class="paragraph">
+<p>Select the specified recurring from the finance tracker.<br>
+Format: <code>selectrecurring INDEX</code><br>
+Shortcut: <code>sr INDEX</code></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the recurring at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listrecurring v/all</code><br>
+<code>selectrecurring 2</code><br>
+Selects the 2nd recurring in the finance tracker.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="clearing-all-recurrings-code-clearrecurring-code"><a class="link" href="#clearing-all-recurrings-code-clearrecurring-code">Clearing all recurrings: <code>clearrecurring</code></a></h3>
 <div class="paragraph">
 <p>Clears all recurrings from the finance tracker.<br>
@@ -353,7 +400,12 @@ Shortcut: <code>cre</code></p>
 <div class="sect4">
 <h5 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h5>
 <div class="paragraph">
-<p>Below is a step-by=step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
+<p>Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for <code>convertrecurring</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ConvertRecurringSequenceDiagram.png" alt="ConvertRecurringSequenceDiagram" width="800">
+</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -376,7 +428,7 @@ Shortcut: <code>cre</code></p>
 <p>If the expense&#8217;s date is before or equals to the current date, and after the <code>lastConvertedDate</code>, this recurring expense will have to be converted into an expense and added into the FinanceTracker. This is done by calling Model#addExpense(recurringListOfExpenses.get(j)).</p>
 </li>
 <li>
-<p>This is done for each expense of the recurring. After the iteration, the recurring&#8217;s <code>lastConvertedDate</code> is set to the current date.</p>
+<p>This is done for every expense that is supposed to be added by this recurring to determine which has to be added into the expense list. After the iteration, the recurring&#8217;s <code>lastConvertedDate</code> is set to the current date.</p>
 </li>
 <li>
 <p>This is done for each recurring in the list.</p>
@@ -385,15 +437,18 @@ Shortcut: <code>cre</code></p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4"><a class="link" href="#delete-and-edit-recurring-deletes-the-associated-expense-coming-in-v1-4">Delete and Edit Recurring deletes the associated Expense (coming in v1.4)</a></h3>
+<div class="sect3">
+<h4 id="advanced-delete-and-edit-recurring-coming-in-v2-0"><a class="link" href="#advanced-delete-and-edit-recurring-coming-in-v2-0">Advanced Delete and Edit Recurring (coming in v2.0)</a></h4>
 <div class="paragraph">
-<p>This is still a work in progress.<br></p>
+<p>This is still a work in progress.</p>
 </div>
 <div class="paragraph">
-<p>The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.</p>
+<p>Currently, <code>deleterecurring</code> does not delete expenses already added by the deleted recurring, and <code>editrecurring</code> does not edit expenses already added by the edited recurring.<br></p>
+</div>
+<div class="paragraph">
+<p>The purpose of this feature is to make <code>deleterecurring</code> and <code>editrecurring</code> more advanced such that the expenses already added by the recurring to be deleted or edited will also reflect the new changes.<br></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-10 06:21:57 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 12:12:38 UTC</div></div></div></body></html>
