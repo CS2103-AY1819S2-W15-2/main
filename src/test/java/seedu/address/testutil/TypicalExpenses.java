@@ -45,8 +45,8 @@ public class TypicalExpenses {
 
     // Manually added - Expense's details found in {@code CommandTestUtil}
     public static final Expense EXPENSE = new ExpenseBuilder().withName(VALID_NAME_EXPENSE)
-            .withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_CATEGORY_EXPENSE)
-            .withCategory(VALID_DATE_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
+            .withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_DATE_EXPENSE)
+            .withCategory(VALID_CATEGORY_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
 
     public static final String KEYWORD_MATCHING_CHICKEN = "Chicken"; // A keyword that matches CHICKEN
 

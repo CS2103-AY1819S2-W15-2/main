@@ -56,6 +56,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
         // initial state
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), SYNC_STATUS_INITIAL);
 
+        String date = DUCK_RICE.getDate().toString();
         // after address book is updated
         guiRobot.interact(() -> financeTracker.addExpense(DUCK_RICE));
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),

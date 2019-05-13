@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_S
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
 
@@ -26,8 +26,8 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: select the first card in the expense list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
-        assertCommandSuccess(command, INDEX_FIRST_PERSON);
+        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased() + "   ";
+        assertCommandSuccess(command, INDEX_FIRST_EXPENSE);
 
         /* Case: select the last card in the expense list -> selected */
         Index personCount = getLastIndex(getModel());
@@ -94,7 +94,7 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: select from empty address book -> rejected */
         deleteAllPersons();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
                 MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
     }
 

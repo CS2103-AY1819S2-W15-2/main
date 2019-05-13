@@ -23,9 +23,9 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
@@ -98,8 +98,8 @@ public abstract class FinanceTrackerSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return mainWindowHandle.getPersonListPanel();
+    public ExpenseListPanelHandle getPersonListPanel() {
+        return mainWindowHandle.getExpenseListPanel();
     }
 
     public MainMenuHandle getMainMenu() {
@@ -181,7 +181,7 @@ public abstract class FinanceTrackerSystemTest {
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
+     * Calls {@code BrowserPanelHandle}, {@code ExpenseListPanelHandle} and {@code StatusBarFooterHandle} to remember
      * their current state.
      */
     private void rememberStates() {
@@ -189,7 +189,7 @@ public abstract class FinanceTrackerSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedPersonCard();
+        getPersonListPanel().rememberSelectedExpenseCard();
     }
 
     /**
@@ -206,7 +206,7 @@ public abstract class FinanceTrackerSystemTest {
      * Asserts that the browser's url is changed to display the details of the expense in the expense list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see ExpenseListPanelHandle#isSelectedExpenseCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
@@ -225,11 +225,11 @@ public abstract class FinanceTrackerSystemTest {
     /**
      * Asserts that the browser's url and the selected card in the expense list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see ExpenseListPanelHandle#isSelectedExpenseCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
+        assertFalse(getPersonListPanel().isSelectedExpenseCardChanged());
     }
 
     /**

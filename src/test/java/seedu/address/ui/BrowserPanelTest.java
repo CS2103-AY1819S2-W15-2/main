@@ -14,13 +14,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.model.expense.Expense;
 
 public class BrowserPanelTest extends GuiUnitTest {
-    private SimpleObjectProperty<Expense> selectedPerson = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
 
     @Before
     public void setUp() {
-        guiRobot.interact(() -> browserPanel = new BrowserPanel(selectedPerson));
+        guiRobot.interact(() -> browserPanel = new BrowserPanel(selectedExpense));
         uiPartRule.setUiPart(browserPanel);
 
         browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());
@@ -32,10 +32,11 @@ public class BrowserPanelTest extends GuiUnitTest {
         assertEquals(BrowserPanel.DEFAULT_PAGE, browserPanelHandle.getLoadedUrl());
 
         // associated web page of a expense
-        guiRobot.interact(() -> selectedPerson.set(DUCK_RICE));
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + DUCK_RICE.getName().name.replaceAll(" ", "%20"));
+        guiRobot.interact(() -> selectedExpense.set(DUCK_RICE));
+        URL expectedExpenseUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
+                + DUCK_RICE.getName().name.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
+        assertEquals(expectedExpenseUrl, browserPanelHandle.getLoadedUrl());
     }
 }

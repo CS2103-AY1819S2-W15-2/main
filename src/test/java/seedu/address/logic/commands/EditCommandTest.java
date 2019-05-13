@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Expense editedExpense = new ExpenseBuilder().build();
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(editedExpense).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_EXPENSE, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedExpense);
 
@@ -78,8 +78,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditExpenseDescriptor());
-        Expense editedExpense = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_EXPENSE, new EditCommand.EditExpenseDescriptor());
+        Expense editedExpense = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedExpense);
 
@@ -91,11 +91,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
 
-        Expense expenseInFilteredList = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Expense expenseInFilteredList = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
         Expense editedExpense = new ExpenseBuilder(expenseInFilteredList).withName(VALID_NAME_DEBT).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_EXPENSE,
                 new EditExpenseDescriptorBuilder().withName(VALID_NAME_DEBT).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedExpense);
@@ -123,8 +123,8 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
+        Index outOfBoundIndex = INDEX_SECOND_EXPENSE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFinanceTracker().getExpenseList().size());
 
@@ -137,9 +137,9 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Expense editedExpense = new ExpenseBuilder().build();
-        Expense expenseToEdit = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Expense expenseToEdit = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(editedExpense).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_EXPENSE, descriptor);
         Model expectedModel = new ModelManager(new FinanceTracker(model.getFinanceTracker()), new UserPrefs());
         expectedModel.setExpense(expenseToEdit, editedExpense);
         expectedModel.commitFinanceTracker();
@@ -182,11 +182,11 @@ public class EditCommandTest {
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
         Expense editedExpense = new ExpenseBuilder().build();
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(editedExpense).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_EXPENSE, descriptor);
         Model expectedModel = new ModelManager(new FinanceTracker(model.getFinanceTracker()), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Expense expenseToEdit = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showPersonAtIndex(model, INDEX_SECOND_EXPENSE);
+        Expense expenseToEdit = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
         expectedModel.setExpense(expenseToEdit, editedExpense);
         expectedModel.commitFinanceTracker();
 
@@ -197,7 +197,7 @@ public class EditCommandTest {
         expectedModel.undoFinanceTracker();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased()), expenseToEdit);
+        assertNotEquals(model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased()), expenseToEdit);
         // redo -> edits same second expense in unfiltered expense list
         expectedModel.redoFinanceTracker();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -205,11 +205,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_EXPENSE);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_EXPENSE, DESC_EXPENSE);
 
         // same values -> returns true
         EditCommand.EditExpenseDescriptor copyDescriptor = new EditCommand.EditExpenseDescriptor(DESC_EXPENSE);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_EXPENSE, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -222,10 +222,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_EXPENSE)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_EXPENSE, DESC_EXPENSE)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_EXPENSE)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_EXPENSE, DESC_EXPENSE)));
     }
 
 }

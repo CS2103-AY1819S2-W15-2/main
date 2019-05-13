@@ -8,7 +8,7 @@ import static seedu.address.testutil.TestUtil.getExpense;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
 
@@ -31,8 +31,9 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: delete the first expense in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Expense deletedExpense = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EXPENSE.getOneBased()
+                + "       ";
+        Expense deletedExpense = removePerson(expectedModel, INDEX_FIRST_EXPENSE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -60,7 +61,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: filtered expense list, delete index within bounds of address book and expense list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_EXPENSE;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
         assertCommandSuccess(index);
 

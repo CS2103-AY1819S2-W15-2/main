@@ -24,8 +24,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 
 import org.junit.Test;
 
@@ -54,7 +54,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_EXPENSE;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_EXPENSE + "  "
                 + AMOUNT_DESC_EXPENSE + " " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " "
                 + REMARKS_DESC_EXPENSE;
@@ -69,7 +69,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: redo editing the last expense in the list -> last expense edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.setExpense(getModel().getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased()), editedExpense);
+        model.setExpense(getModel().getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased()), editedExpense);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a expense with new values same as existing values -> edited */
@@ -79,7 +79,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: edit a expense with new values same as another expense's values but with different name -> edited */
         assertTrue(getModel().getFinanceTracker().getExpenseList().contains(EXPENSE));
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_EXPENSE;
         assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), EXPENSE);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT
                 + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
@@ -89,7 +89,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: edit a expense with new values same as another expense's values but with different phone and email
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_EXPENSE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
         editedExpense =
@@ -97,7 +97,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, index, editedExpense);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_EXPENSE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased();
         Expense expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
         editedExpense = new ExpenseBuilder(expenseToEdit).build();
@@ -107,7 +107,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: filtered expense list, edit index within bounds of address book and expense list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_EXPENSE;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_DEBT;
         expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
@@ -128,7 +128,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
          * browser url changes
          */
         showAllPersons();
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_EXPENSE;
         selectPerson(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
@@ -156,27 +156,27 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_CATEGORY_DESC, Email.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_DATE_DESC, Address.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_DEADLINE_DESC, Tag.MESSAGE_CONSTRAINTS);
     }
 

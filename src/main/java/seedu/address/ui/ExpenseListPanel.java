@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.expense.Expense;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of expenses.
  */
 public class ExpenseListPanel extends UiPart<Region> {
     private static final String FXML = "ExpenseListPanel.fxml";

@@ -4,14 +4,14 @@ import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.TypicalExpenses.getTypicalExpenses;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysExpense;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.ExpenseCardHandle;
+import guitests.guihandles.ExpenseListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,18 +28,18 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
     private final SimpleObjectProperty<Expense> selectedPerson = new SimpleObjectProperty<>();
-    private PersonListPanelHandle personListPanelHandle;
+    private ExpenseListPanelHandle expenseListPanelHandle;
 
     @Test
     public void display() {
         initUi(TYPICAL_EXPENSES);
 
         for (int i = 0; i < TYPICAL_EXPENSES.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_EXPENSES.get(i));
+            expenseListPanelHandle.navigateToCard(TYPICAL_EXPENSES.get(i));
             Expense expectedExpense = TYPICAL_EXPENSES.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            ExpenseCardHandle actualCard = expenseListPanelHandle.getExpenseCardHandle(i);
 
-            assertCardDisplaysPerson(expectedExpense, actualCard);
+            assertCardDisplaysExpense(expectedExpense, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -47,12 +47,13 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     @Test
     public void selection_modelSelectedPersonChanged_selectionChanges() {
         initUi(TYPICAL_EXPENSES);
-        Expense secondExpense = TYPICAL_EXPENSES.get(INDEX_SECOND_PERSON.getZeroBased());
+        Expense secondExpense = TYPICAL_EXPENSES.get(INDEX_SECOND_EXPENSE.getZeroBased());
         guiRobot.interact(() -> selectedPerson.set(secondExpense));
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+        ExpenseCardHandle expectedPerson = expenseListPanelHandle.getExpenseCardHandle(
+                INDEX_SECOND_EXPENSE.getZeroBased());
+        ExpenseCardHandle selectedPerson = expenseListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
@@ -88,7 +89,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code ExpenseListPanel} backed by {@code backingList}.
+     * Initializes {@code expenseListPanelHandle} with a {@code ExpenseListPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code ExpenseListPanel}.
      */
     private void initUi(ObservableList<Expense> backingList) {
@@ -96,7 +97,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
                 new ExpenseListPanel(backingList, selectedPerson, selectedPerson::set);
         uiPartRule.setUiPart(expenseListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(expenseListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        expenseListPanelHandle = new ExpenseListPanelHandle(getChildNode(expenseListPanel.getRoot(),
+                ExpenseListPanelHandle.EXPENSE_LIST_VIEW_ID));
     }
 }

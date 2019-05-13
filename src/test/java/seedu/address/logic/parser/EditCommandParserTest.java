@@ -26,9 +26,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EXPENSE;
 
 import org.junit.Test;
 
@@ -102,7 +102,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_EXPENSE;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_DEBT + REMARKS_DESC_DEBT
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + NAME_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
 
@@ -116,7 +116,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_DEBT + CATEGORY_DESC_EXPENSE;
 
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT)
@@ -129,7 +129,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_EXPENSE;
         String userInput = targetIndex.getOneBased() + NAME_DESC_EXPENSE;
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withName(VALID_NAME_EXPENSE).build();
@@ -163,7 +163,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE
@@ -180,7 +180,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_DEBT;
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withAmount(VALID_AMOUNT_DEBT).build();
@@ -198,7 +198,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_EXPENSE;
         String userInput = targetIndex.getOneBased() + "";
 
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withRemarks("").build();

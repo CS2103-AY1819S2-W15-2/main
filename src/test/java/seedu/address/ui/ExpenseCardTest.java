@@ -3,13 +3,14 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysExpense;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.ExpenseCardHandle;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseBuilder;
+
 
 public class ExpenseCardTest extends GuiUnitTest {
 
@@ -61,12 +62,12 @@ public class ExpenseCardTest extends GuiUnitTest {
     private void assertCardDisplay(ExpenseCard expenseCard, Expense expectedExpense, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(expenseCard.getRoot());
+        ExpenseCardHandle expenseCardHandle = new ExpenseCardHandle(expenseCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());
+        assertEquals(Integer.toString(expectedId) + ". ", expenseCardHandle.getId());
 
         // verify expense details are displayed correctly
-        assertCardDisplaysPerson(expectedExpense, personCardHandle);
+        assertCardDisplaysExpense(expectedExpense, expenseCardHandle);
     }
 }

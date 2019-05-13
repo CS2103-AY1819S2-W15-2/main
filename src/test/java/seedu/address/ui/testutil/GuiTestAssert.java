@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.ExpenseCardHandle;
+import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.expense.Expense;
 
@@ -16,50 +16,48 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
-    public static void assertCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
+    public static void assertCardEquals(ExpenseCardHandle expectedCard, ExpenseCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
-        assertEquals(expectedCard.getAddress(), actualCard.getAddress());
-        assertEquals(expectedCard.getEmail(), actualCard.getEmail());
+        assertEquals(expectedCard.getAmount(), actualCard.getAmount());
+        assertEquals(expectedCard.getDate(), actualCard.getDate());
         assertEquals(expectedCard.getName(), actualCard.getName());
-        assertEquals(expectedCard.getPhone(), actualCard.getPhone());
-        assertEquals(expectedCard.getTags(), actualCard.getTags());
+        assertEquals(expectedCard.getCategory(), actualCard.getCategory());
     }
 
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedExpense}.
      */
-    public static void assertCardDisplaysPerson(Expense expectedExpense, PersonCardHandle actualCard) {
+    public static void assertCardDisplaysExpense(Expense expectedExpense, ExpenseCardHandle actualCard) {
         assertEquals(expectedExpense.getName().name, actualCard.getName());
-        assertEquals(expectedExpense.getAmount().value, actualCard.getPhone());
-        assertEquals(expectedExpense.getCategory(), actualCard.getEmail());
-        assertEquals(expectedExpense.getDate(), actualCard.getAddress());
-        assertEquals(expectedExpense.getRemarks(), actualCard.getAddress());
+        assertEquals("$" + expectedExpense.getAmount(), actualCard.getAmount());
+        assertEquals(expectedExpense.getCategory().toString(), actualCard.getCategory());
+        assertEquals(expectedExpense.getDate().toString(), actualCard.getDate());
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code expenses} correctly and
+     * Asserts that the list in {@code expenseListPanelHandle} displays the details of {@code expenses} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Expense... expenses) {
+    public static void assertListMatching(ExpenseListPanelHandle expenseListPanelHandle, Expense... expenses) {
         for (int i = 0; i < expenses.length; i++) {
-            personListPanelHandle.navigateToCard(i);
-            assertCardDisplaysPerson(expenses[i], personListPanelHandle.getPersonCardHandle(i));
+            expenseListPanelHandle.navigateToCard(i);
+            assertCardDisplaysExpense(expenses[i], expenseListPanelHandle.getExpenseCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code expenses} correctly and
+     * Asserts that the list in {@code expenseListPanelHandle} displays the details of {@code expenses} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Expense> expenses) {
-        assertListMatching(personListPanelHandle, expenses.toArray(new Expense[0]));
+    public static void assertListMatching(ExpenseListPanelHandle expenseListPanelHandle, List<Expense> expenses) {
+        assertListMatching(expenseListPanelHandle, expenses.toArray(new Expense[0]));
     }
 
     /**
-     * Asserts the size of the list in {@code personListPanelHandle} equals to {@code size}.
+     * Asserts the size of the list in {@code expenseListPanelHandle} equals to {@code size}.
      */
-    public static void assertListSize(PersonListPanelHandle personListPanelHandle, int size) {
-        int numberOfPeople = personListPanelHandle.getListSize();
+    public static void assertListSize(ExpenseListPanelHandle expenseListPanelHandle, int size) {
+        int numberOfPeople = expenseListPanelHandle.getListSize();
         assertEquals(size, numberOfPeople);
     }
 

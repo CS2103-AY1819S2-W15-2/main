@@ -19,17 +19,17 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="recurringExpenseId" styleClass="cell_big_label">
+        <Label id="recurringExpenseId" fx:id="recurringExpenseId" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="recurringExpenseName" text="\$first" styleClass="cell_big_label" />
+        <Label id="recurringExpenseName" fx:id="recurringExpenseName" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="recurringExpenseAmount" styleClass="cell_small_label" text="\$amount" />
-      <Label fx:id="recurringExpenseDate" styleClass="cell_small_label" text="\$date" />
-      <Label fx:id="recurringExpenseCategory" styleClass="cell_small_label" text="\$category" />
+      <Label id="recurringExpenseAmount" fx:id="recurringExpenseAmount" styleClass="cell_small_label" text="\$amount" />
+      <Label id="recurringExpenseDate" fx:id="recurringExpenseDate" styleClass="cell_small_label" text="\$date" />
+      <Label id="recurringExpenseCategory" fx:id="recurringExpenseCategory" styleClass="cell_small_label" text="\$category" />
     </VBox>
   </GridPane>
 </HBox>

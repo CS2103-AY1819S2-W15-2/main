@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="budgetCardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="budgetCardPane" fx:id="budgetCardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
@@ -22,11 +22,11 @@
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
-        <Label fx:id="budgetCategory" text="\$category" styleClass="cell_big_label" />
+        <Label id="budgetCategory" fx:id="budgetCategory" text="\$category" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="budgetAmount" styleClass="cell_small_label" text="\$amount" />
-      <Label fx:id="budgetStartDate" styleClass="cell_small_label" text="\$startdate" />
-      <Label fx:id="budgetEndDate" styleClass="cell_small_label" text="\$enddate" />
+      <Label id="budgetAmount" fx:id="budgetAmount" styleClass="cell_small_label" text="\$amount" />
+      <Label id="budgetStartDate" fx:id="budgetStartDate" styleClass="cell_small_label" text="\$startdate" />
+      <Label id="budgetEndDate" fx:id="budgetEndDate" styleClass="cell_small_label" text="\$enddate" />
     </VBox>
   </GridPane>
 </HBox>
